@@ -140,7 +140,8 @@ class Usuario_admin extends CI_Controller {
     function upload_file() {
         //Configure
         //set the path where the files uploaded will be copied. NOTE if using linux, set the folder to permission 777
-
+        //necesita darle permisos a la carpeta para poder subir el archivo 777 en linux
+        
         $this->data['msg'] = '';
         $this->data['nombre'] = 'no hay titulo en el momento';
 
@@ -150,7 +151,7 @@ class Usuario_admin extends CI_Controller {
         $this->form_validation->set_rules('titulo', 'Titulo', 'required');
         $this->form_validation->set_rules('autor', 'Autor', 'required');
         $this->form_validation->set_rules('director', 'Director', 'required');
-        $this->form_validation->set_rules('ano', 'Ano', 'required|exact_length[4]');
+        $this->form_validation->set_rules('ano', 'Año', 'required|exact_length[4]|numeric');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
         $this->form_validation->set_rules('keywords', 'Palabras Claves', 'required');
         $this->form_validation->set_rules('programa', 'Programa', 'required|integer|greater_than[-1]|less_than[5]');
@@ -167,11 +168,14 @@ class Usuario_admin extends CI_Controller {
                 $nombres = ['ADMINISTRACION DE EMPRESAS', 'CONTADURIA PUBLICA', 'EDU FISICA', 'INGENIERIA  INDUSTRIAL', 'PSICOLOGIA'];
 
                 //verificar que exista el directorio
-                if (!is_dir("application/tesis/" . $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano'))) {
-                    mkdir("application/tesis/" . $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano'), 0777, TRUE);
+                if (!is_dir("/home/zamir/Documents/tesiscompletas/" . $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano'))) {
+                    
+                    $oldmask = umask(0);
+                    mkdir("/home/zamir/Documents/tesiscompletas/" . $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano'), 0777, TRUE);
+                    umask($oldmask);
                 }
 
-                $config['upload_path'] = "application/tesis/" . $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano');
+                $config['upload_path'] = "/home/zamir/Documents/tesiscompletas/" . $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano');
                 $config['allowed_types'] = 'pdf';
                 $this->upload->initialize($config);
                 $this->upload->set_allowed_types('pdf');
@@ -192,7 +196,7 @@ class Usuario_admin extends CI_Controller {
                     $datos['Path'] = $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano') . "/" . $nombrearchivo;
                     $this->load->model('usuario_model');
                     $this->usuario_model->insert_ficha($datos);
-                    $this->session->set_flashdata("success", "La tesis fue creada exitosamente");
+                    $this->session->set_flashdata("success", "La tesis: <strong> " . $datos['Titulo']."</strong><br> Ha sido creada con éxito.");
                     redirect(current_url());
                 }
 

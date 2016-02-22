@@ -29,6 +29,14 @@
                         <div class="active section">Añadir Tesis</div>
                     </div>
 
+                    <?php echo validation_errors('<div class="ui negative message">', "</div>"); ?>
+
+                    <?php
+                    if ($this->session->flashdata("success") !== FALSE) {
+                        echo '<div class="ui positive message">' . $this->session->flashdata("success") . '</div>';
+                    }
+                    ?>
+
                     <h3 class="ui header">
                         <i class="add square icon"></i>
                         <div class="content">
@@ -87,9 +95,9 @@
 
                             <div class="field">
                                 <div class="ui accordion">
-                                    
+
                                     <div class="title">
-                                         <i class="dropdown icon"></i>
+                                        <i class="dropdown icon"></i>
                                         Resumen: 
                                     </div>
                                     <div class="content">
@@ -100,27 +108,26 @@
 
 
 
-                            <div class="one fields">
+                            
                                 <div class="field">
-                                    <label for="userfile" class="ui icon button">Subir archivo 
+                                    <label id="marvel" for="userfile" class="ui icon button">
+                                        
+                                            Subir archivo
                                         <i class="file icon"></i>
                                     </label>
                                     <input id="userfile" style="display:none" type="file" name="userfile" size="20" required="true" />
                                 </div>
-                            </div>
+                           
+
+<!--                            <input type="file" name="file" id="file" class="inputfile" />
+                            <label id="marvel" for="file">Choose a file</label>-->
 
                             <input class="ui button" type="submit" value="Crear Tesis" />
                             <?php echo form_close(); ?>
 
-                            <p><?php echo $msg; ?></p>
 
 
 
-                            <?php
-                            if ($this->session->flashdata("success") !== FALSE) {
-                                echo "<div class=\"formSuccess\">" . $this->session->flashdata("success") . "</div>\n";
-                            }
-                            ?>
 
 
                         </div>
@@ -130,10 +137,7 @@
 
                 </div>         
 
-                <!-- div show oculto para visualizar los datos y aprobar o denegar-->
-                <div id="show"></div> 
-                <!-- div popup oculto para formulario de solicitud-->
-                <div id="mensajes"></div> 
+
 
 
             </div>
