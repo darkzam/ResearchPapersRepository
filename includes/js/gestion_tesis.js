@@ -10,7 +10,7 @@ $(document).on('ready', function () {
        
        if(e.target.files[0].name !== ''){
            
-           $('#marvel').html(e.target.files[0].name + '<i class="file icon"></i>');
+           $('#marvel').html('<p>'+e.target.files[0].name + '</p><i class="file icon"></i>');
            
        }
    });

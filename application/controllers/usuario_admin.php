@@ -435,10 +435,10 @@ class Usuario_admin extends CI_Controller {
 
     function push_file($string, $name) {
         // make sure it's a file before doing anything!
-        $path = utf8_decode($string);
-        $directoriobase = "./application/tesis/";
+      //  $path = utf8_decode($string);
+        $path = $string;
+        $directoriobase = "/home/zamir/Documents/tesiscompletas/";
         $path = $directoriobase . urldecode($path);
-
 
         if (is_file($path)) {
             // required for IE
@@ -465,6 +465,9 @@ class Usuario_admin extends CI_Controller {
             header('Connection: close');
             readfile($path); // push it out
             exit();
+        }else{
+            echo "no se encontro el archivo: ". $path;
+            
         }
     }
 

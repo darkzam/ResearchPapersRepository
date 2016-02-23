@@ -9,26 +9,18 @@
     <div class=" field"> 
         <label>Programa Academico: </label>
         <input name="programa" type="text" value="<?php echo $tesis['Programa'] ?>" required="true"/>
-
-
     </div>
-    <?php
-    
-//    $string = $tesis['path'];
-//    $string = urldecode($string);
-//    $path_parts = explode('/', $string);
 
-    ?>
-<!--    <div class="field">
-        <label>Programa Academico: </label>
-        <select name="programa" required>
-            <option selected value="0">ADMINISTRACIÓN DE EMPRESAS</option>
-            <option value="1">CONTADURÍA PÚBLICA</option>
-            <option value="2">EDU FISICA</option>
-            <option value="3">INGENIERIA INDUSTRIAL</option>
-            <option value="4">PSICOLOGIA</option>
-        </select>
-    </div>-->
+    <!--    <div class="field">
+            <label>Programa Academico: </label>
+            <select name="programa" required>
+                <option selected value="0">ADMINISTRACIÓN DE EMPRESAS</option>
+                <option value="1">CONTADURÍA PÚBLICA</option>
+                <option value="2">EDU FISICA</option>
+                <option value="3">INGENIERIA INDUSTRIAL</option>
+                <option value="4">PSICOLOGIA</option>
+            </select>
+        </div>-->
 
 </div>
 
@@ -62,9 +54,6 @@
 
 
 
-
-
-
 <div class="field">
     <div class="ui accordion">
         <div class="title">
@@ -79,10 +68,21 @@
     </div>
 </div>
 
+<?php
+$string1 = $tesis['Path'];
+$string2 = urldecode($string1);
+$path_parts = explode('/', $string2);
+?>
+
+<div class="field">
+    <label>Archivo pdf: </label>
+    <div><?php echo $path_parts[count($path_parts) - 1] ?></div>
+</div>
+
 
 
 <div class="field">
-    <label for="userfile" class="ui icon button">Subir Nuevo Archivo 
+    <label id="marvel" for="userfile" class="ui icon button elegance">Subir Nuevo Archivo 
         <i class="file icon"></i>
     </label>
     <input id="userfile" style="display:none" type="file" name="userfile" size="20" />

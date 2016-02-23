@@ -36,8 +36,8 @@
                         echo '<div class="ui positive message">' . $this->session->flashdata("success") . '</div>';
                     }
                     ?>
-                    
-                     <?php echo $msg ; ?>
+
+                    <?php echo $msg; ?>
 
                     <h3 class="ui header">
                         <i class="add square icon"></i>
@@ -110,16 +110,16 @@
 
 
 
-
-                            <div class="field">
-                                <label id="marvel" for="userfile" class="ui icon button">
-
-                                    Subir archivo
-                                    <i class="file icon"></i>
-                                </label>
-                                <input id="userfile" style="display:none" type="file" name="userfile" size="20" required="true" />
-                            </div>
-
+                            
+                                <div class="field">
+                                    <label id="marvel" for="userfile" class="ui icon button elegance">
+                                         Subir archivo
+                                       
+                                        <i class="file icon"></i>
+                                    </label>
+                                    <input id="userfile" style="display:none" type="file" name="userfile" size="20" required="true" />
+                                </div>
+                           
 
                             <input class="ui button" type="submit" value="Crear Tesis" />
                             <?php echo form_close(); ?>

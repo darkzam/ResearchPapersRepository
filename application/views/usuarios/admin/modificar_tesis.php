@@ -184,7 +184,7 @@
                                 <div id="formulario"></div>
                                 <br>
                                 <?php echo form_close(); ?>
-                                <button id="visualizar" class="ui button" >Visualizar</button>
+                                <button id="visualizar" class="ui button">Descargar</button>
                             </div>
                         </div>
                     </div>

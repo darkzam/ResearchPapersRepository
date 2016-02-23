@@ -1,7 +1,7 @@
 numpagina = '';
 filainicial = 0;
 
-$(document).on('ready', function() {
+$(document).on('ready', function () {
 
 
     $('.ui.accordion').accordion();
@@ -26,7 +26,7 @@ $(document).on('ready', function() {
             'url': 'http://localhost/SistemaConsultas/usuario_admin/get_tesis',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'fila': filainicial, 'regmax': registrosporpagina, 'fid': fid},
-            'success': function(data) { //probably this request will return anything, it'll be put in var "data"
+            'success': function (data) { //probably this request will return anything, it'll be put in var "data"
                 var container = $('#tabla_fichas'); //jquery selector (get element by id)
                 if (data) {
 
@@ -48,7 +48,7 @@ $(document).on('ready', function() {
                 pagination2(registrosporpagina, false);
 
             },
-            error: function(e) {
+            error: function (e) {
 
                 alert("error index");
                 console.log(e);
@@ -71,7 +71,7 @@ $(document).on('ready', function() {
             'url': 'http://localhost/SistemaConsultas/usuario_admin/busqueda_ajax_tesis',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'claves': claves, 'fila': filainicial, 'regmax': registrosporpagina},
-            'success': function(data) { //probably this request will return anything, it'll be put in var "data"
+            'success': function (data) { //probably this request will return anything, it'll be put in var "data"
                 var container = $('#tabla_fichas');
                 if (data) {
                     container.html(data);
@@ -95,7 +95,7 @@ $(document).on('ready', function() {
                 pagination2(registrosporpagina, true);
 
             },
-            error: function(e) {
+            error: function (e) {
 
                 alert("error");
                 console.log(e);
@@ -107,9 +107,9 @@ $(document).on('ready', function() {
 
     }
 
-    $('#btitulo').on('keyup', function() {
+    $('#btitulo').on('keyup', function () {
         filainicial = 0;
-        delay(function() {
+        delay(function () {
             $('#imagen0').addClass('search icon');
             $('#oculto').prop('hidden', false);
             index2();
@@ -117,59 +117,59 @@ $(document).on('ready', function() {
 
 
     });
-    
-    $('#bautor').on('keyup', function() {
+
+    $('#bautor').on('keyup', function () {
         filainicial = 0;
-        delay(function() {
+        delay(function () {
             $('#imagen1').addClass('search icon');
             $('#oculto').prop('hidden', false);
             index2();
         }, 300);
     });
 
-    $('#bdirector').on('keyup', function() {
+    $('#bdirector').on('keyup', function () {
         filainicial = 0;
 
-        delay(function() {
+        delay(function () {
             $('#imagen2').addClass('search icon');
             $('#oculto').prop('hidden', false);
             index2();
         }, 300);
     });
 
-    $('#baño').on('keyup', function() {
+    $('#baño').on('keyup', function () {
         filainicial = 0;
 
-        delay(function() {
+        delay(function () {
             $('#imagen3').addClass('search icon');
             $('#oculto').prop('hidden', false);
             index2();
         }, 300);
     });
 
-    $('#bkeywords').on('keyup', function() {
+    $('#bkeywords').on('keyup', function () {
         filainicial = 0;
 
-        delay(function() {
+        delay(function () {
             $('#imagen4').addClass('search icon');
             $('#oculto').prop('hidden', false);
             index2();
         }, 300);
     });
 
-    $('#bprogramaac').on('keyup', function() {
+    $('#bprogramaac').on('keyup', function () {
         filainicial = 0;
 
-        delay(function() {
+        delay(function () {
             $('#imagen5').addClass('search icon');
             $('#oculto').prop('hidden', false);
             index2();
         }, 300);
     });
 
-    var delay = (function() {
+    var delay = (function () {
         var timer = 0;
-        return function(callback, ms) {
+        return function (callback, ms) {
             clearTimeout(timer);
             timer = setTimeout(callback, ms);
         };
@@ -185,7 +185,7 @@ $(document).on('ready', function() {
     function pagination2(r, busqueda) {
         //podemos optimizar de forma que en index no llame esta funcion mas adelante
 
-        $("#next").on('click', function() {
+        $("#next").on('click', function () {
 
             filainicial = filainicial + r;
             if (busqueda) {
@@ -195,7 +195,7 @@ $(document).on('ready', function() {
             }
         });
 
-        $("#previous").on('click', function() {
+        $("#previous").on('click', function () {
 
             filainicial = filainicial - r;
             if (busqueda) {
@@ -208,7 +208,7 @@ $(document).on('ready', function() {
     }
     function eventoNumeroFilas(busqueda) {
         $('#paginas').unbind('change');
-        $('#paginas').change(function() {
+        $('#paginas').change(function () {
             filainicial = 0;
             if (busqueda) {
                 index2();
@@ -221,7 +221,7 @@ $(document).on('ready', function() {
 
     function eventoFuser() {
 
-        $('#fid').on('keyup', function() {
+        $('#fid').on('keyup', function () {
             filainicial = 0;
             $('#imagen').addClass('search icon');
             index();
@@ -237,7 +237,7 @@ $(document).on('ready', function() {
 
         for (var i = 0; i < tam; i++) {
 
-            $('#' + i).on('click', function() {
+            $('#' + i).on('click', function () {
                 var id = $(this).children().first().text();
                 filactual = $(this).attr('id');
                 //este es el id de del primer hijo de la fila o sea el id de la solicitud
@@ -269,19 +269,19 @@ $(document).on('ready', function() {
             'url': 'http://localhost/SistemaConsultas/usuario_admin/ajax_tesis_id',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'id': e},
-            'success': function(data) { //probably this request will return anything, it'll be put in var "data"
+            'success': function (data) { //probably this request will return anything, it'll be put in var "data"
                 var container = $('#formulario');
                 if (data) {
                     container.html(data);
                     cargar();
                     $('#loader1').removeClass('active');
-
+                    evento_userfile();
 
 
                 }
 
             },
-            error: function(e) {
+            error: function (e) {
 
                 alert("error");
             }
@@ -295,11 +295,13 @@ $(document).on('ready', function() {
 
         // botonActualizar();
         botonVisualizar(id);
+        
         // botonesSgteAtras();
 
         $('#principal').tab('change tab', 'p2');
         $('#pestaña1').tab('change tab', 'p2');
         $('#pestaña2').tab('change tab', 'p2');
+        
     }
 
     function cargar() {
@@ -310,12 +312,27 @@ $(document).on('ready', function() {
 
     function botonVisualizar(id) {
         $("#visualizar").unbind('click');
-        $("#visualizar").on('click', function() {
+        $("#visualizar").on('click', function () {
 
 
             window.open('visualizar/' + id, '_blank');
 
 
+        });
+
+    }
+
+    function evento_userfile() {
+        $('#userfile').unbind('change');
+        $('#userfile').on('change', function (e) {
+          //  alert("funciona");
+            console.log(e.target.files[0].name);
+
+            if (e.target.files[0].name !== '') {
+
+                $('#marvel').html('<p>' + e.target.files[0].name + '</p><i class="file icon"></i>');
+
+            }
         });
 
     }
