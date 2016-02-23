@@ -80,7 +80,7 @@ class Usuario_model extends CI_Model {
             array('field' => 'register_first_name', 'label' => 'First Name', 'rules' => 'required'),
             array('field' => 'register_last_name', 'label' => 'Last Name', 'rules' => 'required'),
             array('field' => 'register_phone_number', 'label' => 'Phone Number', 'rules' => 'required'),
-         //   array('field' => 'codigo', 'label' => 'codigo', 'rules' => 'required'),
+            //   array('field' => 'codigo', 'label' => 'codigo', 'rules' => 'required'),
             array('field' => 'programa', 'label' => 'programa', 'rules' => 'required'),
             array('field' => 'sede', 'label' => 'sede', 'rules' => 'required'),
             array('field' => 'register_newsletter', 'label' => 'Newsletter', 'rules' => 'integer'),
@@ -775,6 +775,22 @@ DATE_FORMAT(max(fecha_login), "%Y-%m") as fechamax
             $this->db->where('Id', $id);
             $this->db->update('fichas', $datos);
         }
+    }
+
+    function get_ultima_ficha() {
+
+        $this->load->database();
+
+        $query = $this->db->query("SELECT fichas.Id from fichas ORDER BY fichas.id DESC LIMIT 1");
+
+        if ($query->num_rows() > 0) {
+
+            $resultado = $query->row_array();
+            
+            return $resultado;
+        }
+        
+        return false;
     }
 
 }

@@ -141,7 +141,7 @@ class Usuario_admin extends CI_Controller {
         //Configure
         //set the path where the files uploaded will be copied. NOTE if using linux, set the folder to permission 777
         //necesita darle permisos a la carpeta para poder subir el archivo 777 en linux
-        
+
         $this->data['msg'] = '';
         $this->data['nombre'] = 'no hay titulo en el momento';
 
@@ -151,7 +151,7 @@ class Usuario_admin extends CI_Controller {
         $this->form_validation->set_rules('titulo', 'Titulo', 'required');
         $this->form_validation->set_rules('autor', 'Autor', 'required');
         $this->form_validation->set_rules('director', 'Director', 'required');
-        $this->form_validation->set_rules('ano', 'Año', 'required|exact_length[4]|numeric');
+        $this->form_validation->set_rules('ano', 'Año', 'required|numeric|exact_length[4]');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
         $this->form_validation->set_rules('keywords', 'Palabras Claves', 'required');
         $this->form_validation->set_rules('programa', 'Programa', 'required|integer|greater_than[-1]|less_than[5]');
@@ -169,7 +169,7 @@ class Usuario_admin extends CI_Controller {
 
                 //verificar que exista el directorio
                 if (!is_dir("/home/zamir/Documents/tesiscompletas/" . $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano'))) {
-                    
+
                     $oldmask = umask(0);
                     mkdir("/home/zamir/Documents/tesiscompletas/" . $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano'), 0777, TRUE);
                     umask($oldmask);
@@ -181,7 +181,7 @@ class Usuario_admin extends CI_Controller {
                 $this->upload->set_allowed_types('pdf');
                 //if not successful, set the error message
                 if (!$this->upload->do_upload('userfile')) {
-                    $this->data['msg'] = $this->upload->display_errors();
+                    $this->data['msg'] = $this->upload->display_errors('<div class="ui negative message">', '</div>');
                 } else { //else, set the success message
                     $datosarchivo = $this->upload->data();
                     $nombrearchivo = $datosarchivo['file_name'];
@@ -196,7 +196,13 @@ class Usuario_admin extends CI_Controller {
                     $datos['Path'] = $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano') . "/" . $nombrearchivo;
                     $this->load->model('usuario_model');
                     $this->usuario_model->insert_ficha($datos);
-                    $this->session->set_flashdata("success", "La tesis: <strong> " . $datos['Titulo']."</strong><br> Ha sido creada con éxito.");
+                    $ultimo = $this->usuario_model->get_ultima_ficha();
+
+                    $this->procesar_Trabajo_Grado($datosarchivo['full_path'], $ultimo['Id']);
+
+                    $this->session->set_flashdata("success", "La tesis: <strong> " . $datos['Titulo'] . "</strong><br> Ha sido creada con éxito.");
+                    //  $this->session->set_flashdata("success","el path es ". $datosarchivo['full_path'] );
+
                     redirect(current_url());
                 }
 
@@ -568,6 +574,20 @@ class Usuario_admin extends CI_Controller {
         //busqueda de fichas con un array de palabras y un string con el nombre de columna
         $this->data['tesis'] = $this->usuario_model->show_fichas($campos, $this->data['fila'], $this->data['regmax'] + 1);
         $this->load->view('usuarios/admin/tabla_tesis', $this->data);
+    }
+
+    private function procesar_Trabajo_Grado($path, $id) {
+
+        //aumentamos el tiempo de ejecucioin del script por si demora mucho -1 es sin limite
+        ini_set('MAX_EXECUTION_TIME', -1);
+        //ver si existe la carpeta Id en tesishojas Sino esta creela con los permisos 777
+        if (!is_dir("/home/zamir/Documents/tesishojas/" . $id)) {
+            $oldmask = umask(0);
+            mkdir("/home/zamir/Documents/tesishojas/" . $id, 0777, TRUE);
+            umask($oldmask);
+        }
+
+        exec('gs -sDEVICE=pdfwrite -dSAFER -o "/home/zamir/Documents/tesishojas/' . $id . '/hoja-%d.pdf" "' . $path . '"');
     }
 
     /*

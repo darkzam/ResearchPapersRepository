@@ -1,8 +1,8 @@
 <?php
 
 $lang['required']			= "El campo <b>%s</b> es requerido";
-$lang['isset']				= "El campo %s debe contener un valor.";
-$lang['valid_email']		= "El campo %s debe contener un email valido.";
+$lang['isset']				= "El campo <b>%s</b> debe contener un valor.";
+$lang['valid_email']		= "El campo <b>%s</b> debe contener un email valido.";
 $lang['valid_emails']		= "The %s field must contain all valid email addresses.";
 $lang['valid_url']			= "The %s field must contain a valid URL.";
 $lang['valid_ip']			= "The %s field must contain a valid IP.";
@@ -12,7 +12,7 @@ $lang['exact_length']		= "El campo <b>%s</b> debe tener exactamente %s digitos d
 $lang['alpha']				= "The %s field may only contain alphabetical characters.";
 $lang['alpha_numeric']		= "The %s field may only contain alpha-numeric characters.";
 $lang['alpha_dash']			= "The %s field may only contain alpha-numeric characters, underscores, and dashes.";
-$lang['numeric']			= "El campo %s debe contener solo numeros.";
+$lang['numeric']			= "El campo <b>%s</b> debe contener solo numeros.";
 $lang['is_numeric']			= "The %s field must contain only numeric characters.";
 $lang['integer']			= "The %s field must contain an integer.";
 $lang['regex_match']		= "The %s field is not in the correct format.";
