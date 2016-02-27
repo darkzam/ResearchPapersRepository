@@ -1,3 +1,4 @@
+dominio = "sistemaconsultas.com";
 
 var pdfFile;
 var canvas = document.getElementById('canvas');
@@ -25,7 +26,7 @@ function crearFrame() {
 
     $.ajax({
         'dataType': "json",
-        'url': 'http://localhost/SistemaConsultas/usuario_public/pdfajax',
+        'url': 'http://'+dominio+'/usuario_public/pdfajax',
         'type': 'POST', //the way you want to send data to your URL
         'data': {'idtg': id, 'pagina': pag},
         'success': function(data) { //probably this request will return anything, it'll be put in var "data"

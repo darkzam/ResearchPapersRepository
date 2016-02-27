@@ -1,3 +1,5 @@
+dominio = "sistemaconsultas.com";
+
 numpagina = '';
 filainicial = 0;
 
@@ -23,7 +25,7 @@ $(document).on('ready', function () {
 //devuelve la tabla de tesis con paginado y busqueda de id
         $('#loader0').addClass('active');
         $.ajax({
-            'url': 'http://localhost/SistemaConsultas/usuario_admin/get_tesis',
+            'url': 'http://'+dominio+'/usuario_admin/get_tesis',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'fila': filainicial, 'regmax': registrosporpagina, 'fid': fid},
             'success': function (data) { //probably this request will return anything, it'll be put in var "data"
@@ -68,7 +70,7 @@ $(document).on('ready', function () {
 
         $('#loader0').addClass('active');
         $.ajax({
-            'url': 'http://localhost/SistemaConsultas/usuario_admin/busqueda_ajax_tesis',
+            'url': 'http://'+dominio+'/usuario_admin/busqueda_ajax_tesis',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'claves': claves, 'fila': filainicial, 'regmax': registrosporpagina},
             'success': function (data) { //probably this request will return anything, it'll be put in var "data"
@@ -266,7 +268,7 @@ $(document).on('ready', function () {
         $('#loader1').addClass('active');
         // $('#loader2').addClass('active');
         $.ajax({
-            'url': 'http://localhost/SistemaConsultas/usuario_admin/ajax_tesis_id',
+            'url': 'http://'+dominio+'/usuario_admin/ajax_tesis_id',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'id': e},
             'success': function (data) { //probably this request will return anything, it'll be put in var "data"

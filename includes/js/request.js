@@ -1,3 +1,5 @@
+dominio = "sistemaconsultas.com";
+
 numpagina = '';
 filainicial = 0;
 
@@ -28,7 +30,7 @@ $(document).on('ready', function() {
 
         $('#loader0').addClass('active');
         $.ajax({
-            'url': 'http://localhost/SistemaConsultas/usuario_admin/manage_request',
+            'url': 'http://'+dominio+'/usuario_admin/manage_request',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'clave': numpagina, 'fila': filainicial, 'regmax': registrosporpagina, 'festado': festado, 'fuser': fuser},
             'success': function(data) { //probably this request will return anything, it'll be put in var "data"
@@ -127,7 +129,7 @@ $(document).on('ready', function() {
         $('#loader1').addClass('active');
         $('#loader2').addClass('active');
         $.ajax({
-            'url': 'http://localhost/SistemaConsultas/usuario_admin/get_request_data',
+            'url': 'http://'+dominio+'/usuario_admin/get_request_data',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'clave': e},
             'success': function(data) { //probably this request will return anything, it'll be put in var "data"
@@ -154,7 +156,7 @@ $(document).on('ready', function() {
         });
 
         $.ajax({
-            'url': 'http://localhost/SistemaConsultas/usuario_admin/historial_solicitud',
+            'url': 'http://'+dominio+'/usuario_admin/historial_solicitud',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'clave': e},
             'success': function(data) { //probably this request will return anything, it'll be put in var "data"
@@ -220,7 +222,7 @@ $(document).on('ready', function() {
 
             var string = $('#comentario').val();
             $.ajax({
-                'url': 'http://localhost/SistemaConsultas/usuario_admin/aprobar',
+                'url': 'http://'+dominio+'/usuario_admin/aprobar',
                 'type': 'POST', //the way you want to send data to your URL
                 'data': {'clave': id, 'observacion': string},
                 'success': function(data) { //probably this request will return anything, it'll be put in var "data"
@@ -245,7 +247,7 @@ $(document).on('ready', function() {
 
             var string = $('#comentario').val();
             $.ajax({
-                'url': 'http://localhost/SistemaConsultas/usuario_admin/denegar',
+                'url': 'http://'+dominio+'/usuario_admin/denegar',
                 'type': 'POST', //the way you want to send data to your URL
                 'data': {'clave': id, 'observacion': string},
                 'success': function(data) { //probably this request will return anything, it'll be put in var "data"
@@ -354,7 +356,7 @@ $(document).on('ready', function() {
             //  alert(estado);
             $.ajax({
                 'dataType': 'json',
-                'url': 'http://localhost/SistemaConsultas/usuario_admin/get_solicitud_sgte_atras',
+                'url': 'http://'+dominio+'/usuario_admin/get_solicitud_sgte_atras',
                 'type': 'POST', //the way you want to send data to your URL
                 'data': {'id': id, 'estado': estado, 'boton': 1},
                 'success': function(data) { //probably this request will return anything, it'll be put in var "data"
@@ -384,7 +386,7 @@ $(document).on('ready', function() {
             //alert(estado);
             $.ajax({
                 'dataType': 'json',
-                'url': 'http://localhost/SistemaConsultas/usuario_admin/get_solicitud_sgte_atras',
+                'url': 'http://'+dominio+'/usuario_admin/get_solicitud_sgte_atras',
                 'type': 'POST', //the way you want to send data to your URL
                 'data': {'id': id, 'estado': estado, 'boton': 0},
                 'success': function(data) { //probably this request will return anything, it'll be put in var "data"

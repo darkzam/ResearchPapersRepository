@@ -1,3 +1,4 @@
+dominio = "sistemaconsultas.com";
 
 $(document).on('ready', function() {
     var unavez = true;
@@ -13,7 +14,7 @@ $(document).on('ready', function() {
         $("#loader0").addClass('active');
         $.ajax({
             'dataType': "json",
-            'url': 'http://localhost/SistemaConsultas/usuario_admin/get_estadisticas',
+            'url': 'http://'+dominio+'/usuario_admin/get_estadisticas',
             'type': 'POST', //the way you want to send data to your URL
             'data': null,
             'success': function(data) { //probably this request will return anything, it'll be put in var "data"
@@ -56,7 +57,7 @@ $(document).on('ready', function() {
         }
         $.ajax({
             'dataType': "json",
-            'url': 'http://localhost/SistemaConsultas/usuario_admin/get_estadisticas_ingresos',
+            'url': 'http://'+dominio+'/usuario_admin/get_estadisticas_ingresos',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'opcion1': seleccion, 'opcion2': seleccion2},
             'success': function(data) { //probably this request will return anything, it'll be put in var "data"

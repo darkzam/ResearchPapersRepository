@@ -1,3 +1,4 @@
+dominio = "sistemaconsultas.com";
 
 filainicial = 0;
 
@@ -17,7 +18,7 @@ $(document).on('ready', function() {
 
         $('#loader0').addClass('active');
         $.ajax({
-            'url': 'http://localhost/SistemaConsultas/usuario_public/buscar',
+            'url': 'http://'+dominio+'/usuario_public/buscar',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'claves': claves, 'fila': filainicial, 'regmax': '5'},
             'success': function(data) { //probably this request will return anything, it'll be put in var "data"
@@ -65,7 +66,7 @@ $(document).on('ready', function() {
         //pestaña trabajo de grado
         $('#loader1').addClass('active');
         $.ajax({
-            'url': 'http://localhost/SistemaConsultas/usuario_public/getbyId',
+            'url': 'http://'+dominio+'/usuario_public/getbyId',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'claves': e},
             'success': function(data) { //probably this request will return anything, it'll be put in var "data"
@@ -91,7 +92,7 @@ $(document).on('ready', function() {
         //pestaña confirmar datos
         $('#loader2').addClass('active');
         $.ajax({
-            'url': 'http://localhost/SistemaConsultas/usuario_public/request_tg',
+            'url': 'http://'+dominio+'/usuario_public/request_tg',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'claves': e},
             'success': function(data) { //probably this request will return anything, it'll be put in var "data"
@@ -128,7 +129,7 @@ $(document).on('ready', function() {
 
             //manda el ajax
             $.ajax({
-                'url': 'http://localhost/SistemaConsultas/usuario_public/crear_solicitud',
+                'url': 'http://'+dominio+'/usuario_public/crear_solicitud',
                 'type': 'POST', //the way you want to send data to your URL
                 'data': {'Id_ficha': id, 'Paginas': paginas},
                 'success': function(data) {

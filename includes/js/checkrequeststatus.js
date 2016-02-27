@@ -1,3 +1,4 @@
+dominio = "sistemaconsultas.com";
 
 filainicial = 0;
 
@@ -8,7 +9,7 @@ $(document).on('ready', function() {
 
     function index() {
         $.ajax({
-            'url': 'http://localhost/SistemaConsultas/usuario_public/get_request_status',
+            'url': 'http://'+dominio+'/usuario_public/get_request_status',
             'type': 'POST', //the way you want to send data to your URL
             'data': { 'fila': filainicial, 'regmax': '5'},
             'success': function(data) { //probably this request will return anything, it'll be put in var "data"
