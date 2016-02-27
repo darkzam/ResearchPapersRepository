@@ -1,6 +1,6 @@
 <?php
 
-$lang['required']			= "El campo <b>%s</b> es requerido";
+$lang['required']			= "El campo <b>%s</b> es requerido.";
 $lang['isset']				= "El campo <b>%s</b> debe contener un valor.";
 $lang['valid_email']		= "El campo <b>%s</b> debe contener un email valido.";
 $lang['valid_emails']		= "The %s field must contain all valid email addresses.";
@@ -16,7 +16,7 @@ $lang['numeric']			= "El campo <b>%s</b> debe contener solo numeros.";
 $lang['is_numeric']			= "The %s field must contain only numeric characters.";
 $lang['integer']			= "The %s field must contain an integer.";
 $lang['regex_match']		= "The %s field is not in the correct format.";
-$lang['matches']			= "The %s field does not match the %s field.";
+$lang['matches']			= "El campo  <b>%s</b> no corresponde con el campo <b>%s</b>.";
 $lang['is_unique'] 			= "The %s field must contain a unique value.";
 $lang['is_natural']			= "The %s field must contain only positive numbers.";
 $lang['is_natural_no_zero']	= "The %s field must contain a number greater than zero.";

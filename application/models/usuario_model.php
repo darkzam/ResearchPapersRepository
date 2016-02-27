@@ -276,9 +276,9 @@ class Usuario_model extends CI_Model {
         // Set validation rules.
         // The custom rule 'validate_password' can be found in '../libaries/MY_Form_validation.php'.
         $validation_rules = array(
-            array('field' => 'current_password', 'label' => 'Current Password', 'rules' => 'required'),
-            array('field' => 'new_password', 'label' => 'New Password', 'rules' => 'required|validate_password|matches[confirm_new_password]'),
-            array('field' => 'confirm_new_password', 'label' => 'Confirm Password', 'rules' => 'required')
+            array('field' => 'current_password', 'label' => 'Password Actual', 'rules' => 'required'),
+            array('field' => 'new_password', 'label' => 'Nuevo Password', 'rules' => 'required|validate_password|matches[confirm_new_password]'),
+            array('field' => 'confirm_new_password', 'label' => 'Confirme el nuevo Password', 'rules' => 'required')
         );
 
         $this->form_validation->set_rules($validation_rules);

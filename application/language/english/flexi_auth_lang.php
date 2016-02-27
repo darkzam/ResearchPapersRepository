@@ -24,9 +24,9 @@ $lang['account_creation_duplicate_identity'] 		= 'An account with this identity 
 $lang['account_creation_insufficient_data']			= 'Insufficient data to create an account. Ensure a valid identity and password are submitted.';
 
 // Password
-$lang['password_invalid']							= "The %s field is invalid.";
-$lang['password_change_successful'] 	 	 		= 'Password has successfully been changed.';
-$lang['password_change_unsuccessful'] 	  	 		= 'Your submitted password does not match our records.';
+$lang['password_invalid']							= "El campo <b>%s</b> es inválido.";
+$lang['password_change_successful'] 	 	 		= 'El Password ha sido actualizado.';
+$lang['password_change_unsuccessful'] 	  	 		= 'El password que ingresaste no se encuentra en la base de datos.';
 $lang['password_token_invalid']  					= 'Your submitted password token is invalid or has expired.'; 
 $lang['email_new_password_successful']				= 'A new password has been emailed to you.';
 $lang['email_forgot_password_successful']	 		= 'An email has been sent to reset your password.';
@@ -52,11 +52,11 @@ $lang['login_details_invalid'] 						= 'Your login details are invalid.';
 $lang['captcha_answer_invalid'] 					= 'CAPTCHA answer is incorrect.';
 $lang['login_attempts_exceeded'] 					= 'The maximum login attempts have been exceeded, please wait a few moments before trying again.';
 $lang['login_session_expired']						= 'Your login session has expired.';
-$lang['account_suspended'] 							= 'Your account has been suspended.';
+$lang['account_suspended'] 							= 'Tu cuenta ha sido suspendida.';
 
 // Account Changes
 $lang['update_successful']							= 'La informacion de la cuenta ha sido actualizada.';
-$lang['update_unsuccessful']						= 'Unable to update account information.';
+$lang['update_unsuccessful']						= 'Incapaz de actualizar la informacion de la cuenta.';
 $lang['delete_successful']							= 'Account information has been successfully deleted.';
 $lang['delete_unsuccessful']						= 'Unable to delete account information.';
 
