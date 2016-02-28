@@ -46,7 +46,7 @@ $lang['email_activation_email_unsuccessful']		= 'Unable to send an email to acti
 
 // Login / Logout
 $lang['login_successful']							= 'Has iniciado sesión.';
-$lang['login_unsuccessful']							= 'Your submitted login details are incorrect.';
+$lang['login_unsuccessful']							= 'Tus datos de logueo son incorrectos verifique su <b>LOGIN</b> y <b>CONTRASEÑA</b>.';
 $lang['logout_successful']							= 'Has cerrado sesion.';
 $lang['login_details_invalid'] 						= 'Your login details are invalid.';
 $lang['captcha_answer_invalid'] 					= 'CAPTCHA answer is incorrect.';

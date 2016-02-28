@@ -20,7 +20,11 @@
                     <h3 class="ui centered header">
                         <img class="ui medium image" src="<?php echo $includes_dir; ?>images/logovallepalmira.png"/>
                         <div class="content">
+
                             Sistema de Consulta de Trabajos de Grado
+                           
+                            <div class="sub header">Loguee con su Email o Codigo/Cedula con el que se registró</div>
+
                         </div>
 
 
@@ -31,7 +35,7 @@
 
 
                         <div class="field ">
-                            <label for="identity">Email o Codigo de Estudiante :</label>
+                            <label for="identity">Login:</label>
 
                             <div class="ui left icon input">
 
@@ -66,16 +70,16 @@
 
                 </div>
                 <?php if (!empty($message)) { ?>
-                <div id="message">
+                    <div id="message">
                         <?php echo $message; ?>
                     </div>
                 <?php } ?>
             </div>
         </div>
-        
+
 
         <!-- Footer -->
-      
+
 
 
         <!-- Scripts -->  
