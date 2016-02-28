@@ -5,7 +5,7 @@
     <div class="item">
         <img id="menuimg" class="ui centered item large image" src="<?php echo $includes_dir; ?>images/manuelita2.png" />
     </div>
-      <div class="item"></div>
+    <div class="item"></div>
 
     <?php if (!$this->flexi_auth->is_admin()) { ?>
 
@@ -104,6 +104,13 @@
             <div class="header">
                 <i class="bar chart icon"></i>
                 Estadisticas
+            </div>
+        </a>
+
+        <a class="item blanco customhover" href="<?php echo $base_url; ?>usuario_admin/logout">
+            <div class="header">      
+                <i class="sign out icon"></i>
+                Salir
             </div>
         </a>
 

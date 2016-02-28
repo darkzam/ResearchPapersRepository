@@ -35,11 +35,15 @@ class usuario_public extends CI_Controller {
 
         // Check user is logged in via either password or 'Remember me'.
         // Note: Allow access to logged out users that are attempting to validate a change of their email address via the 'update_email' page/method.
-        if (!$this->flexi_auth->is_logged_in() && $this->uri->segment(2) != 'update_email') {
+        if (!$this->flexi_auth->is_logged_in()) {
             // Set a custom error message.
-            $this->flexi_auth->set_error_message('You must login to access this area.', TRUE);
+            $this->flexi_auth->set_error_message('Debes loguearte para acceder a este area.', TRUE);
             $this->session->set_flashdata('message', $this->flexi_auth->get_messages());
             redirect('usuario');
+        }
+
+        if ($this->flexi_auth->is_admin()) {
+            redirect('usuario_admin/dashboard');
         }
 
         // Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
@@ -48,6 +52,7 @@ class usuario_public extends CI_Controller {
         $this->load->vars('current_url', $this->uri->uri_to_assoc(1));
         // Define a global variable to store data that is then used by the end view page.
         $this->data = null;
+        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
         // $this->data['busqueda']= null;
     }
 

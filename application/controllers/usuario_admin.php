@@ -49,15 +49,19 @@ class Usuario_admin extends CI_Controller {
 
         // Define a global variable to store data that is then used by the end view page.
         $this->data = null;
+        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
     }
 
     function index() {
+
         $this->dashboard();
     }
 
     function dashboard() {
+
         $this->data['message'] = $this->session->flashdata('message');
         $this->data['test'] = $this->auth->session_data;
+
         $this->load->view('usuarios/admin/tablero_admin', $this->data);
     }
 
@@ -435,7 +439,7 @@ class Usuario_admin extends CI_Controller {
 
     function push_file($string, $name) {
         // make sure it's a file before doing anything!
-      //  $path = utf8_decode($string);
+        //  $path = utf8_decode($string);
         $path = $string;
         $directoriobase = "/home/zamir/Documents/tesiscompletas/";
         $path = $directoriobase . urldecode($path);
@@ -465,9 +469,8 @@ class Usuario_admin extends CI_Controller {
             header('Connection: close');
             readfile($path); // push it out
             exit();
-        }else{
-            echo "no se encontro el archivo: ". $path;
-            
+        } else {
+            echo "no se encontro el archivo: " . $path;
         }
     }
 
@@ -591,6 +594,17 @@ class Usuario_admin extends CI_Controller {
         }
 
         exec('gs -sDEVICE=pdfwrite -dSAFER -o "/home/zamir/Documents/tesishojas/' . $id . '/hoja-%d.pdf" "' . $path . '"');
+    }
+
+    function logout() {
+        // By setting the logout functions argument as 'TRUE', all browser sessions are logged out.
+
+        $this->flexi_auth->logout(TRUE);
+
+        // Set a message to the CI flashdata so that it is available after the page redirect.
+        $this->session->set_flashdata('message', $this->flexi_auth->get_messages());
+
+        redirect('usuario');
     }
 
     /*

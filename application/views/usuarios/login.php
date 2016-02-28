@@ -20,14 +20,9 @@
                     <h3 class="ui centered header">
                         <img class="ui medium image" src="<?php echo $includes_dir; ?>images/logovallepalmira.png"/>
                         <div class="content">
-
                             Sistema de Consulta de Trabajos de Grado
-                           
                             <div class="sub header">Loguee con su Email o Codigo/Cedula con el que se registró</div>
-
                         </div>
-
-
                     </h3>
                     <div class="ui padded grid">
                         <div class="ui four wide column"></div>

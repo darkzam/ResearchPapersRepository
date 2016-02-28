@@ -51,7 +51,7 @@ $lang['logout_successful']							= 'Has cerrado sesion.';
 $lang['login_details_invalid'] 						= 'Your login details are invalid.';
 $lang['captcha_answer_invalid'] 					= 'CAPTCHA answer is incorrect.';
 $lang['login_attempts_exceeded'] 					= 'The maximum login attempts have been exceeded, please wait a few moments before trying again.';
-$lang['login_session_expired']						= 'Your login session has expired.';
+$lang['login_session_expired']						= 'Tu sesion ha expirado.';
 $lang['account_suspended'] 							= 'Tu cuenta ha sido suspendida.';
 
 // Account Changes
