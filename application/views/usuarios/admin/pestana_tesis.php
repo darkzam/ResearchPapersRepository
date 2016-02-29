@@ -8,7 +8,7 @@
     </div>
     <!--    <div class=" field"> 
             <label>Programa Academico: </label>
-            <input name="programa" type="text" value="<?php //echo $tesis['Programa']          ?>" required="true"/>
+            <input name="programa" type="text" value="<?php //echo $tesis['Programa']           ?>" required="true"/>
         </div>-->
 
     <div class="field">
@@ -97,12 +97,11 @@
 <?php
 $string1 = $tesis['Path'];
 $string2 = urldecode($string1);
-$path_parts = explode('/', $string2);
 ?>
 
 <div class="field">
     <label>Archivo pdf: </label>
-    <div><?php echo $path_parts[count($path_parts) - 1] ?></div>
+    <div><?php echo $string2; ?></div>
 </div>
 
 

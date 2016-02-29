@@ -209,7 +209,7 @@ class Usuario_admin extends CI_Controller {
 
                     $this->procesar_Trabajo_Grado($datosarchivo['full_path'], $ultimo['Id']);
 
-                    $this->session->set_flashdata("success", "La tesis: <strong> " . $datos['Titulo'] . "</strong><br> Ha sido creada con éxito.");
+                    $this->session->set_flashdata("success", "La tesis: <strong> ".$ultimo['Id']." - " . $datos['Titulo'] . "</strong><br> Ha sido creada con éxito.");
                     //  $this->session->set_flashdata("success","el path es ". $datosarchivo['full_path'] );
 
                     redirect('usuario_admin/gestionar_tesis');
@@ -442,17 +442,15 @@ class Usuario_admin extends CI_Controller {
         $this->load->model('usuario_model');
         $this->data['id'] = $id;
         $this->data['ficha'] = $this->usuario_model->show_ficha_by_id($id);
-        //  $this->load->view('fallo', $this->data);
-        //  $this->push_file($this->data['ficha']['Path'], 'Ajedrez.pdf');
-        $this->push_file($this->data['ficha']['Path'], 'temp.pdf');
+        $programa = $this->usuario_model->get_programas( $this->data['ficha']['Programa']);
+        $this->push_file($this->data['ficha']['Path'], $this->data['ficha']['Año'], $programa['codigo']);
     }
 
-    function push_file($string, $name) {
+    function push_file($name, $año, $codigo) {
         // make sure it's a file before doing anything!
-        //  $path = utf8_decode($string);
-        $path = $string;
-        $directoriobase = "/home/zamir/Documents/tesiscompletas/";
-        $path = $directoriobase . urldecode($path);
+        //$nombrearchivo = utf8_decode($name);
+        $directoriobase = "/home/zamir/Documents/tesiscompletas/" . $codigo . "/" . $año . "/";
+        $path = $directoriobase . urldecode($name);
 
         if (is_file($path)) {
             // required for IE
@@ -473,13 +471,14 @@ class Usuario_admin extends CI_Controller {
             header('Cache-Control: private', false);
             header('Content-Type: ' . $mime);  // Add the mime type from Code igniter.
             //header('Content-Type: application/pdf'); 
-            header('Content-Disposition: inline; filename="' . basename($name) . '"');  // Add the file name
+            header('Content-Disposition: inline; filename="' . $name . '"');  // Add the file name
             header('Content-Transfer-Encoding: binary');
             header('Content-Length: ' . filesize($path)); // provide file size
             header('Connection: close');
             readfile($path); // push it out
             exit();
         } else {
+          
             echo "no se encontro el archivo: " . $path;
         }
     }
