@@ -786,7 +786,25 @@ DATE_FORMAT(max(fecha_login), "%Y-%m") as fechamax
         if ($query->num_rows() > 0) {
 
             $resultado = $query->row_array();
+
+            return $resultado;
+        }
+
+        return false;
+    }
+
+    function get_programas() {
+
+        $this->load->database();
+
+        $this->db->select('*')->from('programas');
+
+        $query = $this->db->get();
+        
+        if($query->num_rows() > 0){
             
+            $resultado = $query->result_array();
+
             return $resultado;
         }
         

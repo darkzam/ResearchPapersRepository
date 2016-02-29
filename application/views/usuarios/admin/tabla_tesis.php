@@ -4,6 +4,7 @@
 if (isset($tesis) && count($tesis)) :
     $item_per_page = $regmax;
     $contador = 0;
+    
     ?>
 
     <table class="ui red celled table table-hover">
@@ -25,6 +26,7 @@ if (isset($tesis) && count($tesis)) :
         <tbody>
 
             <?php
+            
             for ($i = 0; $i < count($tesis); $i++) {
                 if ($contador == $item_per_page) {
 
@@ -38,8 +40,17 @@ if (isset($tesis) && count($tesis)) :
                     <td><?php echo $tesis[$i]['Director']; ?></td>
                     <td><?php echo $tesis[$i]['Año']; ?></td>
                     <td><?php echo $tesis[$i]['Keywords']; ?></td>
-                    <td><?php echo $tesis[$i]['Programa']; ?></td>
-                           <!--                    <td><?php // echo $tesis[$i]['Resumen'];           ?></td>-->
+                    <td><?php
+                        foreach ($programas as $programa) {
+                            if ($tesis[$i]['Programa'] === $programa['id']) {
+                                echo $programa['codigo'] . "\n" . $programa['nombre'];
+                                break;
+                            }
+                        }
+                       
+                        ?>
+                    </td>
+                                             <!--                    <td><?php // echo $tesis[$i]['Resumen'];               ?></td>-->
                 </tr>
 
                 <?php

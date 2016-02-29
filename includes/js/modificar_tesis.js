@@ -25,7 +25,7 @@ $(document).on('ready', function () {
 //devuelve la tabla de tesis con paginado y busqueda de id
         $('#loader0').addClass('active');
         $.ajax({
-            'url': 'http://'+dominio+'/usuario_admin/get_tesis',
+            'url': 'http://' + dominio + '/usuario_admin/get_tesis',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'fila': filainicial, 'regmax': registrosporpagina, 'fid': fid},
             'success': function (data) { //probably this request will return anything, it'll be put in var "data"
@@ -70,7 +70,7 @@ $(document).on('ready', function () {
 
         $('#loader0').addClass('active');
         $.ajax({
-            'url': 'http://'+dominio+'/usuario_admin/busqueda_ajax_tesis',
+            'url': 'http://' + dominio + '/usuario_admin/busqueda_ajax_tesis',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'claves': claves, 'fila': filainicial, 'regmax': registrosporpagina},
             'success': function (data) { //probably this request will return anything, it'll be put in var "data"
@@ -159,14 +159,21 @@ $(document).on('ready', function () {
         }, 300);
     });
 
-    $('#bprogramaac').on('keyup', function () {
+//    $('#bprogramaac').on('keyup', function () {
+//        filainicial = 0;
+//
+//        delay(function () {
+//            $('#imagen5').addClass('search icon');
+//            $('#oculto').prop('hidden', false);
+//            index2();
+//        }, 300);
+//    });
+
+    $('#bprogramaac').on('change', function () {
         filainicial = 0;
 
-        delay(function () {
-            $('#imagen5').addClass('search icon');
-            $('#oculto').prop('hidden', false);
-            index2();
-        }, 300);
+        index2();
+
     });
 
     var delay = (function () {
@@ -268,7 +275,7 @@ $(document).on('ready', function () {
         $('#loader1').addClass('active');
         // $('#loader2').addClass('active');
         $.ajax({
-            'url': 'http://'+dominio+'/usuario_admin/ajax_tesis_id',
+            'url': 'http://' + dominio + '/usuario_admin/ajax_tesis_id',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'id': e},
             'success': function (data) { //probably this request will return anything, it'll be put in var "data"
@@ -297,13 +304,13 @@ $(document).on('ready', function () {
 
         // botonActualizar();
         botonVisualizar(id);
-        
+
         // botonesSgteAtras();
 
         $('#principal').tab('change tab', 'p2');
         $('#pestaña1').tab('change tab', 'p2');
         $('#pestaña2').tab('change tab', 'p2');
-        
+
     }
 
     function cargar() {
@@ -327,7 +334,7 @@ $(document).on('ready', function () {
     function evento_userfile() {
         $('#userfile').unbind('change');
         $('#userfile').on('change', function (e) {
-          //  alert("funciona");
+            //  alert("funciona");
             console.log(e.target.files[0].name);
 
             if (e.target.files[0].name !== '') {

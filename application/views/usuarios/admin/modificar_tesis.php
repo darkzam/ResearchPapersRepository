@@ -125,15 +125,34 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="field">
-                                                <label for="bprogramaac">Buscar por Programa Academico</label>
-                                                <div class="ui loading search">
+                                            <!--                                            <div class="field">
+                                                                                            <label for="bprogramaac">Buscar por Programa Academico</label>
+                                                                                            <div class="ui loading search">
+                                            
+                                                                                                <div class="ui icon input">
+                                                                                                    <input type="text" id="bprogramaac" class="prompt" placeholder="Buscar Programa">
+                                                                                                    <i id="imagen4" class=""></i>   
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>-->
 
-                                                    <div class="ui icon input">
-                                                        <input type="text" id="bprogramaac" class="prompt" placeholder="Buscar Programa">
-                                                        <i id="imagen4" class=""></i>   
-                                                    </div>
-                                                </div>
+                                            <div class="field">
+                                                <label>Buscar por Programa Academico: </label>
+                                                <select id="bprogramaac" name="programa" required>
+                                                    <option selected value="">Todos</option>
+                                                    <?php
+                                                    foreach ($programas as $programa) {
+                                                        ?>
+                                                        <option value="<?php echo $programa['id']; ?>">
+                                                            <?php
+                                                            echo $programa['codigo'] . "-" . $programa['nombre'];
+                                                            ?>
+                                                        </option>
+
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
 
                                         </div>

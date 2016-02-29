@@ -38,6 +38,13 @@
                 Actualizar Cuenta
             </div>
         </a>
+    
+        <a class="item blanco customhover" href="<?php echo $base_url; ?>usuario_public/logout">
+            <div class="header">      
+                <i class="sign out icon"></i>
+                Salir
+            </div>
+        </a>
 
     <?php } else { ?>
 
@@ -117,13 +124,5 @@
         <?php
     }
     ?> 	
-    <a class="item blanco customhover" href="<?php echo $base_url; ?>usuario_public/logout">
-        <div class="header">      
-            <i class="sign out icon"></i>
-            Salir
-        </div>
-    </a>
-
-
 
 </div>

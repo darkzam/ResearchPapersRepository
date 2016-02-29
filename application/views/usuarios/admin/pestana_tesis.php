@@ -6,21 +6,47 @@
         <label>Id: </label>
         <input readonly="" name="identificacion" type="text" value="<?php echo $tesis['Id'] ?>" required="true"/>
     </div>
-    <div class=" field"> 
-        <label>Programa Academico: </label>
-        <input name="programa" type="text" value="<?php echo $tesis['Programa'] ?>" required="true"/>
-    </div>
-
-    <!--    <div class="field">
+    <!--    <div class=" field"> 
             <label>Programa Academico: </label>
-            <select name="programa" required>
-                <option selected value="0">ADMINISTRACIÓN DE EMPRESAS</option>
-                <option value="1">CONTADURÍA PÚBLICA</option>
-                <option value="2">EDU FISICA</option>
-                <option value="3">INGENIERIA INDUSTRIAL</option>
-                <option value="4">PSICOLOGIA</option>
-            </select>
+            <input name="programa" type="text" value="<?php //echo $tesis['Programa']          ?>" required="true"/>
         </div>-->
+
+    <div class="field">
+        <label>Programa Academico: </label>
+        <select name="programa" required>
+            <?php
+            $seleccionado = false;
+            foreach ($programas as $programa) {
+                ?>
+
+                <?php
+                if ($tesis['Programa'] === $programa['id']) {
+                    $seleccionado = true;
+                }
+                ?>
+
+                <option <?php
+                if ($seleccionado) {
+                    echo "selected";
+                }
+                ?> value="<?php echo $programa['id']; ?>">
+                        <?php
+                        if ($seleccionado) {
+                            echo "**";
+                        }
+                        echo $programa['codigo'] . "-" . $programa['nombre'];
+                        if ($seleccionado) {
+                            echo "**";
+                        }
+                        ?>
+                </option>
+
+                <?php
+                $seleccionado = false;
+            }
+            ?>
+        </select>
+    </div>
 
 </div>
 

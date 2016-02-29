@@ -405,6 +405,8 @@ class Usuario_admin extends CI_Controller {
             redirect('usuario_admin');
         }
         $this->data['msg'] = '';
+        $this->load->model('usuario_model');
+        $this->data['programas'] = $this->usuario_model->get_programas();
         $this->load->view('usuarios/admin/modificar_tesis', $this->data);
     }
 
@@ -416,6 +418,8 @@ class Usuario_admin extends CI_Controller {
 
         $this->load->model('usuario_model');
         $this->data['tesis'] = $this->usuario_model->get_fichas($this->data['fila'], $this->data['regmax'] + 1, $idficha);
+
+        $this->data['programas'] = $this->usuario_model->get_programas();
         $this->load->view('usuarios/admin/tabla_tesis', $this->data);
     }
 
@@ -424,6 +428,7 @@ class Usuario_admin extends CI_Controller {
         $id = $this->input->post('id');
         $this->load->model('usuario_model');
         $this->data['tesis'] = $this->usuario_model->show_ficha_by_id($id);
+        $this->data['programas'] = $this->usuario_model->get_programas();
         $this->load->view('usuarios/admin/pestana_tesis', $this->data);
     }
 
@@ -579,6 +584,8 @@ class Usuario_admin extends CI_Controller {
         $this->data['regmax'] = $this->input->post('regmax');
         //busqueda de fichas con un array de palabras y un string con el nombre de columna
         $this->data['tesis'] = $this->usuario_model->show_fichas($campos, $this->data['fila'], $this->data['regmax'] + 1);
+        $this->data['programas'] = $this->usuario_model->get_programas();
+
         $this->load->view('usuarios/admin/tabla_tesis', $this->data);
     }
 
