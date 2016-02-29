@@ -29,20 +29,25 @@
                             <div class="active section">Modificar Tesis</div>
                         </div>
 
+
+
+                        <?php echo validation_errors('<div class="ui negative message">', "</div>"); ?>
+
+                        <?php
+                        if ($this->session->flashdata("success") !== FALSE) {
+                            echo '<div class="ui positive message">' . $this->session->flashdata("success") . '</div>';
+                        }
+                        ?>
+
+
+                        <?php echo $msg; ?>
+                        
                         <h3 class="ui header">
                             <i class="edit icon"></i>
                             <div class="content">
                                 Modificar Tesis
                             </div>
                         </h3>
-
-
-                        <?php if (!empty($message)) { ?>
-                            <div id="message">
-                                <?php echo $message; ?>
-                            </div>
-                        <?php } ?>
-
 
                         <!------------------------>
                         <div id="busquedacont" class="ui segment">

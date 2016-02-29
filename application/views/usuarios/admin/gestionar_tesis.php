@@ -39,6 +39,7 @@
 
                     <?php echo $msg; ?>
 
+
                     <h3 class="ui header">
                         <i class="add square icon"></i>
                         <div class="content">
@@ -75,15 +76,34 @@
                             </div>
 
                             <div class="two fields">
+                                <!--                                                                <div class="field">
+                                                                                                    <label>Programa Academico: </label>
+                                                                                                    <input type="text" name="ano" value="" required="true"/>
+                                                                                                    <select name="programa" required>
+                                                                                                        <option selected value="0">ADMINISTRACIÓN DE EMPRESAS</option>
+                                                                                                        <option value="1">CONTADURÍA PÚBLICA</option>
+                                                                                                        <option value="2">EDU FISICA</option>
+                                                                                                        <option value="3">INGENIERIA INDUSTRIAL</option>
+                                                                                                        <option value="4">PSICOLOGIA</option>
+                                                                                                    </select>
+                                                                                                </div>-->
+
                                 <div class="field">
                                     <label>Programa Academico: </label>
-        <!--                            <input type="text" name="ano" value="" required="true"/>-->
                                     <select name="programa" required>
-                                        <option selected value="0">ADMINISTRACIÓN DE EMPRESAS</option>
-                                        <option value="1">CONTADURÍA PÚBLICA</option>
-                                        <option value="2">EDU FISICA</option>
-                                        <option value="3">INGENIERIA INDUSTRIAL</option>
-                                        <option value="4">PSICOLOGIA</option>
+
+                                        <?php
+                                        foreach ($programas as $programa) {
+                                            ?>
+                                            <option value="<?php echo $programa['id']; ?>">
+                                                <?php
+                                                echo $programa['codigo'] . "-" . $programa['nombre'];
+                                                ?>
+                                            </option>
+
+                                            <?php
+                                        }
+                                        ?>
                                     </select>
                                 </div>
 
@@ -110,16 +130,16 @@
 
 
 
-                            
-                                <div class="field">
-                                    <label id="marvel" for="userfile" class="ui icon button elegance">
-                                         Subir archivo
-                                       
-                                        <i class="file icon"></i>
-                                    </label>
-                                    <input id="userfile" style="display:none" type="file" name="userfile" size="20" required="true" />
-                                </div>
-                           
+
+                            <div class="field">
+                                <label id="marvel" for="userfile" class="ui icon button elegance">
+                                    Subir archivo
+
+                                    <i class="file icon"></i>
+                                </label>
+                                <input id="userfile" style="display:none" type="file" name="userfile" size="20" required="true" />
+                            </div>
+
 
                             <input class="ui button" type="submit" value="Crear Tesis" />
                             <?php echo form_close(); ?>

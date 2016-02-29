@@ -138,6 +138,8 @@ class Usuario_admin extends CI_Controller {
             redirect('usuario_admin');
         }
         $this->data['msg'] = '';
+        $this->load->model('usuario_model');
+        $this->data['programas'] = $this->usuario_model->get_programas();
         $this->load->view('usuarios/admin/gestionar_tesis', $this->data);
     }
 
@@ -166,21 +168,25 @@ class Usuario_admin extends CI_Controller {
         } else {
             //load the upload library
 
+            $this->load->model('usuario_model');
 
             if (!empty($_FILES['userfile']['name'])) {
-                $this->load->library('upload');
-                $nombres = ['ADMINISTRACION DE EMPRESAS', 'CONTADURIA PUBLICA', 'EDU FISICA', 'INGENIERIA  INDUSTRIAL', 'PSICOLOGIA'];
 
+                $idprograma = $this->input->post('programa');
+                $programa = $this->usuario_model->get_programas($idprograma);
+
+//                $nombres = ['ADMINISTRACION DE EMPRESAS', 'CONTADURIA PUBLICA', 'EDU FISICA', 'INGENIERIA  INDUSTRIAL', 'PSICOLOGIA'];
                 //verificar que exista el directorio
-                if (!is_dir("/home/zamir/Documents/tesiscompletas/" . $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano'))) {
+                if (!is_dir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'))) {
 
                     $oldmask = umask(0);
-                    mkdir("/home/zamir/Documents/tesiscompletas/" . $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano'), 0777, TRUE);
+                    mkdir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'), 0777, TRUE);
                     umask($oldmask);
                 }
-
-                $config['upload_path'] = "/home/zamir/Documents/tesiscompletas/" . $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano');
+                $config['remove_spaces'] = false;
+                $config['upload_path'] = "/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano');
                 $config['allowed_types'] = 'pdf';
+                $this->load->library('upload');
                 $this->upload->initialize($config);
                 $this->upload->set_allowed_types('pdf');
                 //if not successful, set the error message
@@ -195,10 +201,9 @@ class Usuario_admin extends CI_Controller {
                     $datos['Año'] = $this->input->post('ano');
                     $datos['Resumen'] = $this->input->post('resumen');
                     $datos['Keywords'] = $this->input->post('keywords');
-
-                    $datos['Programa'] = $nombres[$this->input->post('programa')];
-                    $datos['Path'] = $nombres[$this->input->post('programa')] . "/" . $this->input->post('ano') . "/" . $nombrearchivo;
-                    $this->load->model('usuario_model');
+                    $datos['Programa'] = $this->input->post('programa');
+                    $datos['Path'] = $nombrearchivo;
+                    // $this->load->model('usuario_model');
                     $this->usuario_model->insert_ficha($datos);
                     $ultimo = $this->usuario_model->get_ultima_ficha();
 
@@ -207,7 +212,7 @@ class Usuario_admin extends CI_Controller {
                     $this->session->set_flashdata("success", "La tesis: <strong> " . $datos['Titulo'] . "</strong><br> Ha sido creada con éxito.");
                     //  $this->session->set_flashdata("success","el path es ". $datosarchivo['full_path'] );
 
-                    redirect(current_url());
+                    redirect('usuario_admin/gestionar_tesis');
                 }
 
                 $this->load->view('usuarios/admin/gestionar_tesis', $this->data);
@@ -489,44 +494,62 @@ class Usuario_admin extends CI_Controller {
 
         // set the filter image types
         // $config['allowed_types'] = 'gif|jpg|png';
-        $config['allowed_types'] = 'pdf';
+
         $this->form_validation->set_rules('titulo', 'Titulo', 'required');
         $this->form_validation->set_rules('autor', 'Autor', 'required');
         $this->form_validation->set_rules('director', 'Director', 'required');
-        $this->form_validation->set_rules('ano', 'Ano', 'required');
+        $this->form_validation->set_rules('ano', 'Año', 'required|numeric|exact_length[4]');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
         $this->form_validation->set_rules('keywords', 'Palabras Claves', 'required');
+        $this->form_validation->set_rules('programa', 'Programa', 'required|integer|greater_than[-1]|less_than[6]');
+
+        $this->load->model('usuario_model');
 
         if ($this->form_validation->run() == FALSE) {
 
+            if (empty($_FILES['userfile']['name']) && empty(validation_errors())) {
+                $this->data['msg'] = "<div class='ui negative message'>No se pudo leer el pdf, agregue permisos de lectura al archivo.</div>";
+            }
+            $this->data['programas'] = $this->usuario_model->get_programas();
             $this->load->view('usuarios/admin/modificar_tesis', $this->data);
         } else {
             //load the upload library
-
-            $this->load->model('usuario_model');
+            //se obtiene el codigo del nuevo programa a actualizar
+            $idprograma = $this->input->post('programa');
+            $programa = $this->usuario_model->get_programas($idprograma);
 
             if (!empty($_FILES['userfile']['name'])) {
                 //imod
+                //nuevo programa
 
-                $ficha = $this->usuario_model->show_ficha_by_id($this->input->post('identificacion'));
-                $pathAnterior = $ficha['Path'];
-                $pathAnterior = utf8_decode($pathAnterior);
-                $pathAnterior = urldecode($pathAnterior);
-                $pathAnterior = dirname($pathAnterior);
-                //path anterior decodificado, y sin nombre de archivo ej: "EDU FISICA/2010/"
+                $directoriobase = "/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano');
+                $config['allowed_types'] = 'pdf';
+                $config['upload_path'] = $directoriobase;
+                $config['remove_spaces'] = false;
+                //entonces detectar si la nueva carpeta de programa existe, sino crearla para subir el archivo independientemente del archivo anterior
+                if (!is_dir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'))) {
 
-                $directoriobase = "./application/tesis/";
-                $config['upload_path'] = $directoriobase . $pathAnterior;
-                //fmod
+                    $oldmask = umask(0);
+                    mkdir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'), 0777, TRUE);
+                    umask($oldmask);
+                }
+
                 $this->load->library('upload');
                 $this->upload->initialize($config);
                 $this->upload->set_allowed_types('pdf');
                 //if not successful, set the error message
                 if (!$this->upload->do_upload('userfile')) {
-                    $this->data['msg'] = $this->upload->display_errors();
+
+                    $this->data['msg'] = $this->upload->display_errors('<div class="ui negative message">', '</div>');
                 } else { //else, set the success message
+                    //sacar datos anteriores de la ficha
+                    $ficha = $this->usuario_model->show_ficha_by_id($this->input->post('identificacion'));
+                    //sacar el codigo del programa viejo
+                    $programaviejo = $this->usuario_model->get_programas($ficha['Programa']);
+
                     $datosarchivo = $this->upload->data();
-                    $path = $datosarchivo['full_path'];
+                    //este es el nombre del archivo que va en el path
+                    $path = $datosarchivo['file_name'];
                     $id = $this->input->post('identificacion');
                     $datos['Titulo'] = $this->input->post('titulo');
                     $datos['Autor'] = $this->input->post('autor');
@@ -535,15 +558,54 @@ class Usuario_admin extends CI_Controller {
                     $datos['Resumen'] = $this->input->post('resumen');
                     $datos['Keywords'] = $this->input->post('keywords');
                     $datos['Path'] = $path;
+                    $datos['Programa'] = $this->input->post('programa');
                     //        $this->load->model('usuario_model');
                     $this->usuario_model->actualizar_ficha($id, $datos, true);
 
-                    $this->session->set_flashdata("success", "La tesis fue modificada exitosamente");
-                    redirect(current_url());
+                    //entonces detectar si el viejo archivo existe si existe borrarlo
+                    //borrar el archivo completo anterior, manteniendo el folder
+                    if (is_file("/home/zamir/Documents/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path'])) {
+
+                        unlink("/home/zamir/Documents/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path']);
+                    }
+                    //borrar la antigua carpeta de id de las hojas para la visualizacion
+                    if (is_dir("/home/zamir/Documents/tesishojas/" . $id)) {
+                        //si existe borre el tesishojas/id/ y su contenido
+                        $files = glob("/home/zamir/Documents/tesishojas/" . $id . "/*"); // get all file names
+                        foreach ($files as $file) { // iterate files
+                            if (is_file($file)) {
+                                unlink($file); // delete file
+                            }
+                        }
+                    }
+                    //procesar tesis y agregar nuevas hojas
+                    $this->procesar_Trabajo_Grado($datosarchivo['full_path'], $id);
+
+                    $this->session->set_flashdata("success", "La tesis <b>" . $id . " - " . $datos['Titulo'] . "</b> fue modificada exitosamente con el nuevo archivo.");
+
+                    redirect('usuario_admin/modificar_tesis');
                 }
 
                 $this->load->view('usuarios/admin/modificar_tesis', $this->data);
             } else {
+                //se actualizan datos pero sin subir nuevo archivo
+                //se verifica que exista el dir, sino existe se crea con permisos 0777
+                if (!is_dir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'))) {
+
+                    $oldmask = umask(0);
+                    mkdir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'), 0777, TRUE);
+                    umask($oldmask);
+                }
+                //sacar el codigo del programa y año y archivo viejo
+                $ficha = $this->usuario_model->show_ficha_by_id($this->input->post('identificacion'));
+                $programaviejo = $this->usuario_model->get_programas($ficha['Programa']);
+                //entonces detectar si el viejo archivo existe si existe borrarlo
+                //si el archivo anterior existe, moverlo al nuevo directorio, luego eliminar el archivo anterior
+                if (is_file("/home/zamir/Documents/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path'])) {
+
+                    rename("/home/zamir/Documents/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path'], "/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano') . "/" . $ficha['Path']);
+                    //   unlink("/home/zamir/Documents/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path']);
+                }
 
                 $id = $this->input->post('identificacion');
                 $datos['Titulo'] = $this->input->post('titulo');
@@ -552,14 +614,12 @@ class Usuario_admin extends CI_Controller {
                 $datos['Año'] = $this->input->post('ano');
                 $datos['Resumen'] = $this->input->post('resumen');
                 $datos['Keywords'] = $this->input->post('keywords');
+                $datos['Programa'] = $this->input->post('programa');
 
-                //     $this->load->model('usuario_model');
                 $this->usuario_model->actualizar_ficha($id, $datos, false);
 
-                $this->session->set_flashdata("success", "La tesis fue modificada exitosamente");
-
-
-                redirect(current_url());
+                $this->session->set_flashdata("success", "La tesis <b>" . $id . " - " . $datos['Titulo'] . "</b> fue modificada exitosamente.");
+                redirect('usuario_admin/modificar_tesis');
             }
         }
     }

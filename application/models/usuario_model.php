@@ -793,22 +793,40 @@ DATE_FORMAT(max(fecha_login), "%Y-%m") as fechamax
         return false;
     }
 
-    function get_programas() {
+    function get_programas($where = false) {
 
         $this->load->database();
 
-        $this->db->select('*')->from('programas');
+        if (!$where) {
 
-        $query = $this->db->get();
-        
-        if($query->num_rows() > 0){
+            $this->db->select('*')->from('programas');
+
+            $query = $this->db->get();
+
+            if ($query->num_rows() > 0) {
+
+                $resultado = $query->result_array();
+
+                return $resultado;
+            }
+
+            return false;
             
-            $resultado = $query->result_array();
+        } else {
 
-            return $resultado;
+            $this->db->select('*')->from('programas')->where('id', $where);
+
+            $query = $this->db->get();
+
+            if ($query->num_rows() > 0) {
+
+                $resultado = $query->row_array();
+
+                return $resultado;
+            }
+
+            return false;
         }
-        
-        return false;
     }
 
 }
