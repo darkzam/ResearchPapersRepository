@@ -107,12 +107,13 @@ class usuario_public extends CI_Controller {
             $this->session->set_flashdata('message', '<p class="error_msg">No tienes los permisos suficientes para esta accion.</p>');
             redirect('usuario_public');
         }
+         $this->load->model('usuario_model');
         // If 'Update Account' form has been submitted, update the user account details.
         if ($this->input->post('update_account')) {
-            $this->load->model('usuario_model');
+           
             $this->usuario_model->update_account();
         }
-
+        $this->data['programas'] = $this->usuario_model->get_programas();
         // Get users current data.
         // This example does so via 'get_user_by_identity()', however, 'get_users()' using any other unqiue identifying column and value could also be used.
         $this->data['user'] = $this->flexi_auth->get_user_by_identity_row_array();

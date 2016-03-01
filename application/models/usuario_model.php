@@ -77,17 +77,16 @@ class Usuario_model extends CI_Model {
         // Set validation rules.
         // The custom rules 'identity_available' and 'validate_password' can be found in '../libaries/MY_Form_validation.php'.
         $validation_rules = array(
-            array('field' => 'register_first_name', 'label' => 'First Name', 'rules' => 'required'),
-            array('field' => 'register_last_name', 'label' => 'Last Name', 'rules' => 'required'),
-            array('field' => 'register_phone_number', 'label' => 'Phone Number', 'rules' => 'required'),
-            //   array('field' => 'codigo', 'label' => 'codigo', 'rules' => 'required'),
-            array('field' => 'programa', 'label' => 'programa', 'rules' => 'required'),
-            array('field' => 'sede', 'label' => 'sede', 'rules' => 'required'),
+            array('field' => 'register_first_name', 'label' => 'Nombres', 'rules' => 'required'),
+            array('field' => 'register_last_name', 'label' => 'Apellidos', 'rules' => 'required'),
+            array('field' => 'register_phone_number', 'label' => 'Telefono', 'rules' => 'required|numeric|is_natural_no_zero'),
+            array('field' => 'programa', 'label' => 'Programa', 'rules' => 'required'),
+            array('field' => 'sede', 'label' => 'Sede', 'rules' => 'required'),
             array('field' => 'register_newsletter', 'label' => 'Newsletter', 'rules' => 'integer'),
-            array('field' => 'register_email_address', 'label' => 'Email Address', 'rules' => 'required|valid_email|identity_available'),
-            array('field' => 'register_username', 'label' => 'Username', 'rules' => 'required|min_length[4]|identity_available|is_natural'),
+            array('field' => 'register_email_address', 'label' => 'Email', 'rules' => 'required|valid_email|identity_available'),
+            array('field' => 'register_username', 'label' => 'Codigo/Cedula', 'rules' => 'required|min_length[7]|identity_available|is_natural'),
             array('field' => 'register_password', 'label' => 'Password', 'rules' => 'required|validate_password'),
-            array('field' => 'register_confirm_password', 'label' => 'Confirm Password', 'rules' => 'required|matches[register_password]')
+            array('field' => 'register_confirm_password', 'label' => 'Confirme el Password', 'rules' => 'required|matches[register_password]')
         );
 
         $this->form_validation->set_rules($validation_rules);
@@ -156,15 +155,15 @@ class Usuario_model extends CI_Model {
         // Set validation rules.
         // The custom rule 'identity_available' can be found in '../libaries/MY_Form_validation.php'.
         $validation_rules = array(
-            array('field' => 'update_first_name', 'label' => 'First Name', 'rules' => 'required'),
-            array('field' => 'update_last_name', 'label' => 'Last Name', 'rules' => 'required'),
+            array('field' => 'update_first_name', 'label' => 'Nombres', 'rules' => 'required'),
+            array('field' => 'update_last_name', 'label' => 'Apellidos', 'rules' => 'required'),
             //  array('field' => 'codigo', 'label' => 'codigo', 'rules' => 'required'),
-            array('field' => 'programa', 'label' => 'programa', 'rules' => 'required'),
+            array('field' => 'programa', 'label' => 'Programa', 'rules' => 'required|integer'),
             array('field' => 'sede', 'label' => 'sede', 'rules' => 'required'),
-            array('field' => 'update_phone_number', 'label' => 'Phone Number', 'rules' => 'required'),
+            array('field' => 'update_phone_number', 'label' => 'Telefono', 'rules' => 'required|is_natural_no_zero'),
             array('field' => 'update_newsletter', 'label' => 'Newsletter', 'rules' => 'integer'),
             array('field' => 'update_email', 'label' => 'Email', 'rules' => 'required|valid_email'),
-            array('field' => 'update_username', 'label' => 'Username', 'rules' => 'min_length[4]')
+            array('field' => 'update_username', 'label' => 'Codigo/Cedula', 'rules' => 'min_length[7]')
         );
 
         $this->form_validation->set_rules($validation_rules);

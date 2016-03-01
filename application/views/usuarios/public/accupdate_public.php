@@ -27,9 +27,9 @@
                         </div>
 
                         <?php if (!empty($message)) { ?>
-                       
-                                <?php echo $message; ?>
-                          
+
+                            <?php echo $message; ?>
+
                         <?php } ?>
 
                         <h2 class="ui header">
@@ -59,20 +59,60 @@
 
                             <div class="ui two fields">
 
-                                <div class="field">
+<!--                                <div class="field">
                                     <label for="programa">Programa Academico:</label>
-                                    <?php $programas = ['Tecnologia de Sistemas', 'Ingenieria de Sistemas', 'Tecnologia en Alimentos', 'Ingenieria de Alimentos', 'Tecnologia Electronica', 'Ingenieria Electronica', 'Ingenieria Industrial', 'Tecnologia Agroambiental', 'Lic. Educacion Fisica', 'Psicologia']; ?>
+                                    <?php //$programas = ['Tecnologia de Sistemas', 'Ingenieria de Sistemas', 'Tecnologia en Alimentos', 'Ingenieria de Alimentos', 'Tecnologia Electronica', 'Ingenieria Electronica', 'Ingenieria Industrial', 'Tecnologia Agroambiental', 'Lic. Educacion Fisica', 'Psicologia']; ?>
                                     <select name="programa" >
-                                        <?php for ($i = 0; count($programas) > $i; $i++) { ?>
+                                        <?php //for ($i = 0; count($programas) > $i; $i++) { ?>
                                             <option <?php
-                                            if ($user['upro_programa'] === $programas[$i]) {
-                                                echo 'selected';
-                                            }
-                                            ?>><?php echo $programas[$i]; ?></option>
-                                            <?php } ?>
+                                            //if ($user['upro_programa'] === $programas[$i]) {
+                                             //   echo 'selected';
+                                           // }
+                                            ?>><?php// echo $programas[$i]; ?></option>
+                                            <?php //} ?>
                                     </select>
 
+                                </div>-->
+
+                                <div class="field">
+                                    <label> Programa Academico: </label>
+                                    <select name="programa" required>
+                                        <?php
+                                        $seleccionado = false;
+                                        foreach ($programas as $programa) {
+                                            ?>
+
+                                            <?php
+                                            if ($user['upro_programa'] === $programa['id']) {
+                                                $seleccionado = true;
+                                            }
+                                            ?>
+
+                                            <option <?php
+                                            if ($seleccionado) {
+                                                echo "selected";
+                                            }
+                                            ?> value="<?php echo $programa['id']; ?>">
+                                                    <?php
+                                                    if ($seleccionado) {
+                                                        echo "**";
+                                                    }
+                                                    echo $programa['codigo'] . "-" . $programa['nombre'];
+                                                    if ($seleccionado) {
+                                                        echo "**";
+                                                    }
+                                                    ?>
+                                            </option>
+
+                                            <?php
+                                            $seleccionado = false;
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
+
+
+
                                 <div class="field">
                                     <label for="sede">Sede:</label>
                                     <!--<input type="text" id="tarjetacredito" name="sede" value="<?php echo $user['upro_sede']; ?>"/>-->
@@ -101,7 +141,7 @@
                                 </div>
                                 <div class="field">
                                     <!--                            <label for="codigo">Codigo/Cedula:</label>-->
-                                    <!--                            <input type="text" id="tarjetacredito" name="codigo" value="<?php //echo $user['upro_codigo'];        ?>"/>-->
+                                    <!--                            <input type="text" id="tarjetacredito" name="codigo" value="<?php //echo $user['upro_codigo'];          ?>"/>-->
                                 </div>
 
 
