@@ -209,7 +209,7 @@ class Usuario_admin extends CI_Controller {
 
                     $this->procesar_Trabajo_Grado($datosarchivo['full_path'], $ultimo['Id']);
 
-                    $this->session->set_flashdata("success", "La tesis: <strong> ".$ultimo['Id']." - " . $datos['Titulo'] . "</strong><br> Ha sido creada con éxito.");
+                    $this->session->set_flashdata("success", "La tesis: <strong> " . $ultimo['Id'] . " - " . $datos['Titulo'] . "</strong><br> Ha sido creada con éxito.");
                     //  $this->session->set_flashdata("success","el path es ". $datosarchivo['full_path'] );
 
                     redirect('usuario_admin/gestionar_tesis');
@@ -288,15 +288,18 @@ class Usuario_admin extends CI_Controller {
             $this->flexi_auth->forgotten_password_complete($id, $result);
             $this->data['nuevopassword'] = $result;
         }
+        $this->load->model('usuario_model');
 
         if ($this->input->post('update_account')) {
-            $this->load->model('usuario_model');
+
             $this->usuario_model->update_account_by_admin($id);
         }
         $this->data['user'] = $user;
         //llamar base de datos con el id
         //cargar a la vista mostrar datos
         $this->data['message'] = (!isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
+
+        $this->data['programas'] = $this->usuario_model->get_programas();
         $this->load->view('usuarios/admin/edit_user', $this->data);
     }
 
@@ -442,7 +445,7 @@ class Usuario_admin extends CI_Controller {
         $this->load->model('usuario_model');
         $this->data['id'] = $id;
         $this->data['ficha'] = $this->usuario_model->show_ficha_by_id($id);
-        $programa = $this->usuario_model->get_programas( $this->data['ficha']['Programa']);
+        $programa = $this->usuario_model->get_programas($this->data['ficha']['Programa']);
         $this->push_file($this->data['ficha']['Path'], $this->data['ficha']['Año'], $programa['codigo']);
     }
 
@@ -478,7 +481,7 @@ class Usuario_admin extends CI_Controller {
             readfile($path); // push it out
             exit();
         } else {
-          
+
             echo "no se encontro el archivo: " . $path;
         }
     }

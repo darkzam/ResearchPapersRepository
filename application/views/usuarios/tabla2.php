@@ -34,7 +34,16 @@ if (isset($resultados) && count($resultados)) :
                     <td><?php echo $resultados[$i]['Año']; ?></td>
                     <td><?php echo $resultados[$i]['Director']; ?></td>
                     <td><?php echo $resultados[$i]['Keywords']; ?></td>
-                    <td><?php echo $resultados[$i]['Programa']; ?></td>
+                    <td><?php
+                        foreach ($programas as $programa) {
+                            if ($resultados[$i]['Programa'] === $programa['id']) {
+                                echo $programa['codigo'] . "\n" . $programa['nombre'];
+                                break;
+                            }
+                        }
+                       
+                        ?>
+                    </td>
                 </tr>
                
                 <?php

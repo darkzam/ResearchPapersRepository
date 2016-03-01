@@ -122,8 +122,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="field">
-                                                <label for="bprogramaac">Buscar por Programa Academico</label>
+<!--                                            <div class="field">
+                                                <label for="bprogramaac"> Buscar por Programa Academico</label>
                                                 <div class="ui loading search">
 
                                                     <div class="ui icon input">
@@ -131,7 +131,27 @@
                                                         <i id="imagen5" class=""></i>   
                                                     </div>
                                                 </div>
+                                            </div>-->
+                                            <div class="field">
+                                                <label>Buscar por Programa Academico: </label>
+                                                <select id="bprogramaac">
+                                                    <option selected value="">Todos</option>
+                                                    <?php
+                                                    foreach ($programas as $programa) {
+                                                        ?>
+                                                        <option value="<?php echo $programa['id']; ?>">
+                                                            <?php
+                                                            echo $programa['codigo'] . "-" . $programa['nombre'];
+                                                            ?>
+                                                        </option>
+
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
+
+
                                         </div>
                                     </form>
                                 </div>

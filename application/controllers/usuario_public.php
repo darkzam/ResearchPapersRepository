@@ -107,10 +107,10 @@ class usuario_public extends CI_Controller {
             $this->session->set_flashdata('message', '<p class="error_msg">No tienes los permisos suficientes para esta accion.</p>');
             redirect('usuario_public');
         }
-         $this->load->model('usuario_model');
+        $this->load->model('usuario_model');
         // If 'Update Account' form has been submitted, update the user account details.
         if ($this->input->post('update_account')) {
-           
+
             $this->usuario_model->update_account();
         }
         $this->data['programas'] = $this->usuario_model->get_programas();
@@ -155,8 +155,9 @@ class usuario_public extends CI_Controller {
             redirect('usuario_public');
         }
         //si el boton submit buscar ha sido presionado, 
-        //    $this->load->model('usuario_model');
-        $this->load->view('usuarios/public/search_by');
+        $this->load->model('usuario_model');
+        $this->data['programas'] = $this->usuario_model->get_programas();
+        $this->load->view('usuarios/public/search_by', $this->data);
     }
 
     function get_list_view() {
@@ -187,6 +188,8 @@ class usuario_public extends CI_Controller {
         $this->data['regmax'] = $this->input->post('regmax');
         //busqueda de fichas con un array de palabras y un string con el nombre de columna
         $this->data['resultados'] = $this->usuario_model->show_fichas($campos, $this->data['fila'], $this->data['regmax'] + 1);
+
+        $this->data['programas'] = $this->usuario_model->get_programas();
         $this->load->view('usuarios/tabla2', $this->data);
     }
 

@@ -219,15 +219,14 @@ class Usuario_model extends CI_Model {
         // Set validation rules.
         // The custom rule 'identity_available' can be found in '../libaries/MY_Form_validation.php'.
         $validation_rules = array(
-            array('field' => 'update_first_name', 'label' => 'First Name', 'rules' => 'required'),
-            array('field' => 'update_last_name', 'label' => 'Last Name', 'rules' => 'required'),
-            //   array('field' => 'codigo', 'label' => 'codigo', 'rules' => 'required'),
-            array('field' => 'programa', 'label' => 'programa', 'rules' => 'required'),
-            array('field' => 'sede', 'label' => 'sede', 'rules' => 'required'),
-            array('field' => 'update_phone_number', 'label' => 'Phone Number', 'rules' => 'required'),
+            array('field' => 'update_first_name', 'label' => 'Nombres', 'rules' => 'required'),
+            array('field' => 'update_last_name', 'label' => 'Apellidos', 'rules' => 'required'),
+            array('field' => 'programa', 'label' => 'Programa', 'rules' => 'required'),
+            array('field' => 'sede', 'label' => 'Sede', 'rules' => 'required'),
+            array('field' => 'update_phone_number', 'label' => 'Telefono', 'rules' => 'required|is_natural_no_zero'),
             array('field' => 'update_newsletter', 'label' => 'Newsletter', 'rules' => 'integer'),
             array('field' => 'update_email', 'label' => 'Email', 'rules' => 'required|valid_email'),
-            array('field' => 'update_username', 'label' => 'Username', 'rules' => 'min_length[4]')
+            array('field' => 'update_username', 'label' => 'Codigo/Cedula', 'rules' => 'required|min_length[7]')
         );
 
         $this->form_validation->set_rules($validation_rules);
@@ -810,7 +809,6 @@ DATE_FORMAT(max(fecha_login), "%Y-%m") as fechamax
             }
 
             return false;
-            
         } else {
 
             $this->db->select('*')->from('programas')->where('id', $where);

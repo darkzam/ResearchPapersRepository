@@ -2,7 +2,7 @@ dominio = "sistemaconsultas.com";
 
 filainicial = 0;
 
-$(document).on('ready', function() {
+$(document).on('ready', function () {
 
     var contador = 0;
 
@@ -18,10 +18,10 @@ $(document).on('ready', function() {
 
         $('#loader0').addClass('active');
         $.ajax({
-            'url': 'http://'+dominio+'/usuario_public/buscar',
+            'url': 'http://' + dominio + '/usuario_public/buscar',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'claves': claves, 'fila': filainicial, 'regmax': '5'},
-            'success': function(data) { //probably this request will return anything, it'll be put in var "data"
+            'success': function (data) { //probably this request will return anything, it'll be put in var "data"
                 var container = $('#container');
                 if (data) {
                     container.html(data);
@@ -49,7 +49,7 @@ $(document).on('ready', function() {
                 pagination2(5);
 
             },
-            error: function(e) {
+            error: function (e) {
 
                 alert("error");
                 console.log(e);
@@ -66,10 +66,10 @@ $(document).on('ready', function() {
         //pestaña trabajo de grado
         $('#loader1').addClass('active');
         $.ajax({
-            'url': 'http://'+dominio+'/usuario_public/getbyId',
+            'url': 'http://' + dominio + '/usuario_public/getbyId',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'claves': e},
-            'success': function(data) { //probably this request will return anything, it'll be put in var "data"
+            'success': function (data) { //probably this request will return anything, it'll be put in var "data"
                 var container = $('#show');
                 if (data) {
                     container.html(data);
@@ -79,7 +79,7 @@ $(document).on('ready', function() {
 
 
             },
-            error: function(e) {
+            error: function (e) {
 
                 alert("error");
             }
@@ -92,10 +92,10 @@ $(document).on('ready', function() {
         //pestaña confirmar datos
         $('#loader2').addClass('active');
         $.ajax({
-            'url': 'http://'+dominio+'/usuario_public/request_tg',
+            'url': 'http://' + dominio + '/usuario_public/request_tg',
             'type': 'POST', //the way you want to send data to your URL
             'data': {'claves': e},
-            'success': function(data) { //probably this request will return anything, it'll be put in var "data"
+            'success': function (data) { //probably this request will return anything, it'll be put in var "data"
                 var container = $('#solicitudes');
                 if (data) {
                     container.html(data);
@@ -104,7 +104,7 @@ $(document).on('ready', function() {
                     evitarLetras();
 
                     $('#confirmar').unbind('click');
-                    $('#confirmar').on('click', function() {
+                    $('#confirmar').on('click', function () {
                         //enviar los datos 
                         ajax4(e);
                     });
@@ -113,7 +113,7 @@ $(document).on('ready', function() {
                 }
             }
             ,
-            error: function(e) {
+            error: function (e) {
 
                 alert("error");
             }
@@ -129,10 +129,10 @@ $(document).on('ready', function() {
 
             //manda el ajax
             $.ajax({
-                'url': 'http://'+dominio+'/usuario_public/crear_solicitud',
+                'url': 'http://' + dominio + '/usuario_public/crear_solicitud',
                 'type': 'POST', //the way you want to send data to your URL
                 'data': {'Id_ficha': id, 'Paginas': paginas},
-                'success': function(data) {
+                'success': function (data) {
                     var container = $('#alerta');
                     if (data) {
 
@@ -141,7 +141,7 @@ $(document).on('ready', function() {
                         scrollabajo();
                     }
                 },
-                'error': function(e) {
+                'error': function (e) {
 
                     alert("error");
                     console.log(e);
@@ -160,12 +160,12 @@ $(document).on('ready', function() {
     }
 
 
-    $('#btitulo').on('keyup', function() {
+    $('#btitulo').on('keyup', function () {
         filainicial = 0;
 
 
 
-        delay(function() {
+        delay(function () {
             $('#imagen0').addClass('search icon');
             $('#oculto').prop('hidden', false);
             ajax();
@@ -175,56 +175,55 @@ $(document).on('ready', function() {
     });
 
 
-    $('#bautor').on('keyup', function() {
+    $('#bautor').on('keyup', function () {
         filainicial = 0;
 
 
 
-        delay(function() {
+        delay(function () {
             $('#imagen1').addClass('search icon');
             $('#oculto').prop('hidden', false);
             ajax();
         }, 300);
     });
 
-    $('#bdirector').on('keyup', function() {
+    $('#bdirector').on('keyup', function () {
         filainicial = 0;
 
-        delay(function() {
+        delay(function () {
             $('#imagen2').addClass('search icon');
             $('#oculto').prop('hidden', false);
             ajax();
         }, 300);
     });
 
-    $('#baño').on('keyup', function() {
+    $('#baño').on('keyup', function () {
         filainicial = 0;
 
-        delay(function() {
+        delay(function () {
             $('#imagen3').addClass('search icon');
             $('#oculto').prop('hidden', false);
             ajax();
         }, 300);
     });
 
-    $('#bkeywords').on('keyup', function() {
+    $('#bkeywords').on('keyup', function () {
         filainicial = 0;
 
-        delay(function() {
+        delay(function () {
             $('#imagen4').addClass('search icon');
             $('#oculto').prop('hidden', false);
             ajax();
         }, 300);
     });
 
-    $('#bprogramaac').on('keyup', function() {
+    $('#bprogramaac').on('change', function () {
         filainicial = 0;
 
-        delay(function() {
-            $('#imagen5').addClass('search icon');
-            $('#oculto').prop('hidden', false);
-            ajax();
-        }, 300);
+
+        $('#oculto').prop('hidden', false);
+        ajax();
+
     });
 
 
@@ -234,7 +233,7 @@ $(document).on('ready', function() {
         var tam = $('table tbody tr').length;
         //alert("numero filas "+tam);
         for (var i = 0; i < tam; i++) {
-            $('#' + i).on('click', function() {
+            $('#' + i).on('click', function () {
                 var id = $(this).children().first().text();
 
                 //alert("el id de la celda es: " + id);
@@ -274,13 +273,13 @@ $(document).on('ready', function() {
 
     function pagination2(r) {
         //podemos optimizar de forma que en index no llame esta funcion mas adelante
-        $("#next").on('click', function() {
+        $("#next").on('click', function () {
 
             filainicial = filainicial + r;
             ajax();
         });
 
-        $("#previous").on('click', function() {
+        $("#previous").on('click', function () {
 
             filainicial = filainicial - r;
             ajax();
@@ -290,7 +289,7 @@ $(document).on('ready', function() {
 
     function evitarLetras() {
 
-        $('#paginas').keypress(function(b)
+        $('#paginas').keypress(function (b)
         {
             var key = b.which || b.keyCode;
 
@@ -311,7 +310,7 @@ $(document).on('ready', function() {
     function botonVisualizar(e) {
 
         $("#visualizar").unbind('click');
-        $("#visualizar").on('click', function() {
+        $("#visualizar").on('click', function () {
 
             window.open('visualizar/' + e, '_blank');
 
@@ -324,15 +323,15 @@ $(document).on('ready', function() {
     function botonAñadirPagina() {
 
         $("#añadir").unbind('click');
-        $("#añadir").on('click', function() {
+        $("#añadir").on('click', function () {
             var temp = contador;
             var paginas = $("#paginas").val();
-            if (paginas !== ''){
+            if (paginas !== '') {
                 var etiqueta = "<div id='label" + temp.toString() + "' class = 'ui label' ><strong class='paginas'>" + paginas + "</strong><i id='clabel" + temp.toString() + "' class = 'delete icon' ></i></div>";
 
                 $("#etiquetas").append(etiqueta);
 
-                $('#clabel' + temp.toString()).on('click', function() {
+                $('#clabel' + temp.toString()).on('click', function () {
                     //  alert("se ejecuta");
                     $('#label' + temp).remove();
 
@@ -348,7 +347,7 @@ $(document).on('ready', function() {
     function getPaginas() {
 
         var string = '';
-        $('strong').each(function(i) {
+        $('strong').each(function (i) {
 
             string = string + ($(this).text()) + ',';
 
@@ -358,9 +357,9 @@ $(document).on('ready', function() {
     }
 
 
-    var delay = (function() {
+    var delay = (function () {
         var timer = 0;
-        return function(callback, ms) {
+        return function (callback, ms) {
             clearTimeout(timer);
             timer = setTimeout(callback, ms);
         };
@@ -376,13 +375,13 @@ $(document).on('ready', function() {
 
     function limpiarAlerta() {
 
-        $('#secundario1').on('click', function() {
+        $('#secundario1').on('click', function () {
 
             $('#alerta').prop('hidden', true);
 
         });
 
-        $('#pestaña1').on('click', function() {
+        $('#pestaña1').on('click', function () {
 
             $('#alerta').prop('hidden', true);
 
