@@ -1,4 +1,5 @@
-dominio = "sistemaconsultas.com";
+//dominio = "sistemaconsultas.com";
+dominio = location.host;
 
 $(document).on('ready', function() {
     var unavez = true;

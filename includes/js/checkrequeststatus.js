@@ -1,4 +1,6 @@
-dominio = "sistemaconsultas.com";
+
+//dominio = "sistemaconsultas.com";
+dominio = location.host;
 
 filainicial = 0;
 

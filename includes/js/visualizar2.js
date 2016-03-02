@@ -1,4 +1,8 @@
-dominio = "sistemaconsultas.com";
+//dominio = "sistemaconsultas.com";
+
+dominio = location.host;
+
+//console.log(location.host);
 
 var pdfFile;
 var canvas = document.getElementById('canvas');
@@ -12,10 +16,10 @@ var totalpaginas = 0;
 
 crearFrame();
 
-$(function() {
-	$(this).bind("contextmenu", function(e) {
-		e.preventDefault();
-	});
+$(function () {
+    $(this).bind("contextmenu", function (e) {
+        e.preventDefault();
+    });
 });
 
 function crearFrame() {
@@ -26,13 +30,13 @@ function crearFrame() {
 
     $.ajax({
         'dataType': "json",
-        'url': 'http://'+dominio+'/usuario_public/pdfajax',
+        'url': 'http://' + dominio + '/usuario_public/pdfajax',
         'type': 'POST', //the way you want to send data to your URL
         'data': {'idtg': id, 'pagina': pag},
-        'success': function(data) { //probably this request will return anything, it'll be put in var "data"
+        'success': function (data) { //probably this request will return anything, it'll be put in var "data"
 
             if (data) {
-             //   console.log(data);
+                //   console.log(data);
                 if (data['existe']) {
                     getPdf(data['path']);
                     totalpaginas = data['npaginas'];
@@ -43,9 +47,9 @@ function crearFrame() {
             }
 
         },
-        error: function(e) {
+        error: function (e) {
 
-         //   alert("error");
+            //   alert("error");
             console.log(e);
 
         }
@@ -55,19 +59,19 @@ function crearFrame() {
 
 function getPdf(url) {
 
-    PDFJS.getDocument(url).then(function(pdf) {
+    PDFJS.getDocument(url).then(function (pdf) {
         pdfFile = pdf;
 
         openPage();
 
-    }, function(error) {
+    }, function (error) {
         console.error("Error: " + error);
     });
 
 }
-var openPage = function() {
+var openPage = function () {
 
-    pdfFile.getPage(1).then(function(page) {
+    pdfFile.getPage(1).then(function (page) {
 
         viewport = page.getViewport(canvas.width / page.getViewport(1.0).width);
         canvas.height = viewport.height;
@@ -80,7 +84,7 @@ var openPage = function() {
         var pageRendering = page.render(renderContext);
 
         var completeCallback = pageRendering.internalRenderTask.callback;
-        pageRendering.internalRenderTask.callback = function(error) {
+        pageRendering.internalRenderTask.callback = function (error) {
             //Step 2: what you want to do before calling the complete method 
             //  alert("awdawdaw");
             completeCallback.call(this, error);
@@ -98,7 +102,7 @@ var openPage = function() {
 function eventos() {
 
     $('#sgte').unbind('click');
-    $('#sgte').on('click', function() {
+    $('#sgte').on('click', function () {
 
 
         pagina = $('#pagina').val();
@@ -115,7 +119,7 @@ function eventos() {
     });
 
     $('#atras').unbind('click');
-    $('#atras').on('click', function() {
+    $('#atras').on('click', function () {
 
         pagina = $('#pagina').val();
         valor = parseInt(pagina);
@@ -130,7 +134,7 @@ function eventos() {
     });
 
     $('#ir').unbind('click');
-    $('#ir').on('click', function() {
+    $('#ir').on('click', function () {
         pagina = $('#pagina').val();
         $('#page_num').text(pagina);
         crearFrame();
