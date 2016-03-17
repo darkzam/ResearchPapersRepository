@@ -137,7 +137,7 @@
 
                                     <i class="file icon"></i>
                                 </label>
-                                <input id="userfile" style="display:none" type="file" name="userfile" size="20" required="true" />
+                                <input id="userfile" style="display:none" type="file" name="userfile" size="20" />
                             </div>
 
 

@@ -429,7 +429,7 @@
 	 *
 	 * Example: 60*60*24 = 24 hours, 60*60*24*14 = 14 days, 86400 = 1 day
 	*/
-	$config['security']['user_cookie_expire'] = 60*60*24*14;
+	$config['security']['user_cookie_expire'] = 86400;
 	
 	/**
 	 * Set whether a users 'Remember me' login cookies have their lifetime extended when their session token is validated.

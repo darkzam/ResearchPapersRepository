@@ -162,15 +162,21 @@ class Usuario_admin extends CI_Controller {
         $this->form_validation->set_rules('keywords', 'Palabras Claves', 'required');
         $this->form_validation->set_rules('programa', 'Programa', 'required|integer|greater_than[-1]|less_than[5]');
 
+        $this->load->model('usuario_model');
+
         if ($this->form_validation->run() == FALSE) {
 
+            if (empty($_FILES['userfile']['name']) && empty(validation_errors())) {
+                $this->data['msg'] = "<div class='ui negative message'>No se pudo leer el pdf, agregue permisos de lectura al archivo.</div>";
+            }
+            $this->data['programas'] = $this->usuario_model->get_programas();
             $this->load->view('usuarios/admin/gestionar_tesis', $this->data);
         } else {
             //load the upload library
 
-            $this->load->model('usuario_model');
-
             if (!empty($_FILES['userfile']['name'])) {
+             //   $this->session->set_flashdata("success", "Por aca paso");
+
 
                 $idprograma = $this->input->post('programa');
                 $programa = $this->usuario_model->get_programas($idprograma);
@@ -215,6 +221,11 @@ class Usuario_admin extends CI_Controller {
                     redirect('usuario_admin/gestionar_tesis');
                 }
 
+                $this->load->view('usuarios/admin/gestionar_tesis', $this->data);
+            } else {
+                //si el userfile es vacio
+                $this->data['msg'] = "<div class='ui negative message'>Debe proporcionar un archivo pdf.</div>";
+                $this->data['programas'] = $this->usuario_model->get_programas();
                 $this->load->view('usuarios/admin/gestionar_tesis', $this->data);
             }
         }
