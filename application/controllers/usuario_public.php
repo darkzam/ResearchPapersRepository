@@ -197,6 +197,7 @@ class usuario_public extends CI_Controller {
         $this->load->model('usuario_model');
         $id = $this->input->post('claves');
         $this->data['ficha'] = $this->usuario_model->show_ficha_by_id($id);
+      //  $this->data['programas'] = $this->usuario_model->get_programas();
         $this->load->view('usuarios/public/popup', $this->data);
     }
 
@@ -205,6 +206,7 @@ class usuario_public extends CI_Controller {
         $id = $this->input->post('claves');
         $this->data['user'] = $this->flexi_auth->get_user_by_identity_row_array();
         $this->data['ficha'] = $this->usuario_model->show_ficha_by_id($id);
+        $this->data['programas'] = $this->usuario_model->get_programas();
         $this->load->view('usuarios/public/request', $this->data);
     }
 

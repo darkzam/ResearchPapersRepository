@@ -36,7 +36,14 @@
     </div>
     <div class="ui two fields">
         <div class="field">
-            <label>Programa Academico</label><input readonly id="pprograma" value="<?php echo $user['upro_programa'] ?>" >
+            <label>Programa Academico</label>
+            
+            
+            <input readonly id="pprograma" value="<?php  foreach ($programas as $programa){
+                
+                if ($user['upro_programa'] === $programa['id']) {
+                         echo $programa['codigo'].'-'. $programa['nombre'];
+            }} ?>" >
         </div>
         <div class="field">
             <label>Sede</label><input readonly id="pdireccion" value="<?php echo $user['upro_sede'] ?>" >

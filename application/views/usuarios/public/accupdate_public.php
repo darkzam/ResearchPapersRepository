@@ -117,7 +117,7 @@
                                     <label for="sede">Sede:</label>
                                     <!--<input type="text" id="tarjetacredito" name="sede" value="<?php echo $user['upro_sede']; ?>"/>-->
 
-                                    <?php $sedes = ['Palmira', 'Cali', 'Tulua', 'Yumbo', 'Caicedonia', 'Buga', 'Zarzal', 'Cartago', 'Santander de Quilichao', 'Buenaventura']; ?>
+                                    <?php $sedes = ['Palmira', 'Cali', 'Tulua', 'Yumbo', 'Caicedonia', 'Buga', 'Zarzal', 'Cartago', 'Santander de Quilichao', 'Buenaventura', 'Otra']; ?>
                                     <select name="sede" >
 
                                         <?php for ($i = 0; count($sedes) > $i; $i++) { ?>
