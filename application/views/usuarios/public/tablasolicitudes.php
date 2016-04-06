@@ -12,9 +12,9 @@ if (isset($solicitudes) && count($solicitudes)) :
                 <th>Usuario</th>
                 <th>Titulo</th>
                 <th>Fecha</th>
-                <th>Estado</th>
                 <th>Paginas</th>
                 <th>Observacion</th>
+                <th>Estado</th>
 
             </tr>
         </thead>
@@ -28,13 +28,16 @@ if (isset($solicitudes) && count($solicitudes)) :
                 }
                 ?>
                 <tr id="<?php echo '' . $contador; ?>" class="justifyText">
-        <!--                    <td hidden="true" id="pid"><?php //echo $solicitudes[$i]['Id'];   ?></td>-->
+        <!--                    <td hidden="true" id="pid"><?php //echo $solicitudes[$i]['Id'];       ?></td>-->
                     <td class="single line"><?php echo $user['upro_first_name'] . " " . $user['upro_last_name']; ?></td>
                     <td><?php echo $solicitudes[$i]['titulo']; ?></td>
                     <td class="single line"><?php echo $solicitudes[$i]['fecha']; ?></td>
-                    <td><?php echo $solicitudes[$i]['estado']; ?></td>
                     <td><?php echo $solicitudes[$i]['paginas']; ?></td>
                     <td><?php echo $solicitudes[$i]['comentarios']; ?></td>
+                    <td style="color: <?php if($solicitudes[$i]['estado'][0]==='p')echo 'blue';
+                    if($solicitudes[$i]['estado'][0]==='a') echo 'green';
+                    if($solicitudes[$i]['estado'][0]==='d') echo 'red';
+                    ?>;"><?php echo $solicitudes[$i]['estado']; ?></td>
                 </tr>
 
                 <?php
@@ -45,26 +48,26 @@ if (isset($solicitudes) && count($solicitudes)) :
         <tfoot>
             <tr>
                 <td class="single line">
-                    
-                        <?php
-                        if (count($solicitudes) > $regmax) {
 
-                            if ($fila > 0) {
-                                echo '<button class="ui tiny left labeled icon button" id="previous">'
-                                . '<i class="left arrow icon"></i>'
-                                . '</button>';
-                            }
-                            echo '<button class="ui tiny right labeled icon button" id="next">'
-                            . '<i class="right arrow icon"></i>'
-                            . '</button>';
-                        } else if (count($solicitudes) <= $regmax && $fila > 0) {
+                    <?php
+                    if (count($solicitudes) > $regmax) {
 
+                        if ($fila > 0) {
                             echo '<button class="ui tiny left labeled icon button" id="previous">'
                             . '<i class="left arrow icon"></i>'
                             . '</button>';
                         }
-                        ?>
-                  
+                        echo '<button class="ui tiny right labeled icon button" id="next">'
+                        . '<i class="right arrow icon"></i>'
+                        . '</button>';
+                    } else if (count($solicitudes) <= $regmax && $fila > 0) {
+
+                        echo '<button class="ui tiny left labeled icon button" id="previous">'
+                        . '<i class="left arrow icon"></i>'
+                        . '</button>';
+                    }
+                    ?>
+
                 </td>
             </tr>
         </tfoot>

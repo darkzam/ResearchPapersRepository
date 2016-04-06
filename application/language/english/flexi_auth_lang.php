@@ -45,7 +45,7 @@ $lang['email_activation_email_successful']			= 'An email has been sent to activa
 $lang['email_activation_email_unsuccessful']		= 'Unable to send an email to activate your new email address.';
 
 // Login / Logout
-$lang['login_successful']							= 'Has iniciado sesión.';
+$lang['login_successful']							= 'Su sesion se encuentra activa, al terminar no olvide cerrar su sesión.';
 $lang['login_unsuccessful']							= 'Tus datos de logueo son incorrectos verifique su <b>LOGIN</b> y <b>CONTRASEÑA</b>.';
 $lang['logout_successful']							= 'Has cerrado sesion.';
 $lang['login_details_invalid'] 						= 'Your login details are invalid.';
