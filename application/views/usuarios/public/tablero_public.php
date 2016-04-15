@@ -94,28 +94,51 @@
                                 </div>
                                 <div class="ui column">
                                     <p>Podemos ingresar rangos validos de paginas(<b>13-25, 20-25</b>), paginas individuales (<b>13, 25, 35</b>), o un conjunto de estas (<b>13, 25, 35-45, 55-75</b>).
-                                       </p>
+                                    </p>
                                     <div class="ui image">
                                         <img src="<?php echo $includes_dir; ?>images/menubusqueda6.png">
                                     </div>
                                 </div>
                                 <div class="ui column">
                                     <p> Estos rangos y paginas los adicionamos a nuestra solicitud dando click en <b>Añadir</b>, con esto podremos ver el contenido a solicitar hasta el momento; se puede borrar cada etiqueta dando click en <b>X</b> como tambien podemos ingresar nuevo contenido a solicitar.</p><p> Por ultimo si hemos confirmado nuestros datos y las paginas a solicitar crearemos la solicitud dando click en <b>Solicitar Tesis</b>. Si deseamos actualizar nuestra informacion de usuario daremos click en <b>Modificar Datos</b>.</p>
-                                </div>
-                                <h3>2.Actualizar Datos</h3>
-                                <h3>3.Consultar las Solicitudes Realizadas</h3>
-                            </div>
-                        </div>
 
+                                    <h3>2.Consultar las Solicitudes Realizadas</h3>
+                                    <p>Para revisar el estado de sus solicitudes entre a la opcion <b>Mis Solicitudes</b> </p>
+                                </div>  
+                                <div class="ui column">
+                                    <div class="ui circular image">
+                                        <img src="<?php echo $includes_dir; ?>images/botonmissol.png">
+                                    </div>
+                                </div>
+                                <div class="ui column">
+
+                                    <p>Donde podra ver un listado con la informacion de sus solicitudes, junto al estado de estas : <b>Pendiente</b> de Revision por parte de un moderador
+                                        , en caso de que su solicitud no sea valida estara <b>Denegada</b> y <b>Aprobada</b> si cumple si la solicitud cumple con las debidas condiciones en cuyo caso podra acercarse a la oficina.
+                                    </p>
+                                </div>
+
+                                <div class="ui column">
+                                    <h3>3.Actualizar Datos</h3>
+                                    <p>Si necesita modificar los Datos de su Cuenta, Informacion Personal y  de Contacto, puede hacerlo entrando a la opcion <b>Actualizar Datos</b> :</p>
+                                </div> 
+                                <div class="ui column">
+                                    <div class="ui column">
+                                        <div class="ui circular image">
+                                            <img src="<?php echo $includes_dir; ?>images/botonactdatos.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <?php $this->load->view('plantillas/footer'); ?> 
+            <?php $this->load->view('plantillas/footer'); ?> 
 
 
-        <!-- Scripts -->  
-        <?php $this->load->view('plantillas/scripts'); ?> 
+            <!-- Scripts -->  
+            <?php $this->load->view('plantillas/scripts'); ?> 
 
     </body>
 </html>

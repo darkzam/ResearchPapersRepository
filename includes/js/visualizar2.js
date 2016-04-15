@@ -15,6 +15,7 @@ var rendering = false;
 var totalpaginas = 0;
 
 crearFrame();
+evitarLetras();
 
 $(function () {
     $(this).bind("contextmenu", function (e) {
@@ -123,7 +124,7 @@ function eventos() {
 
         pagina = $('#pagina').val();
         valor = parseInt(pagina);
-        if (valor > 1) {
+        if (valor > 1 && valor <= totalpaginas) {
             valor = valor - 1;
             $('#pagina').val(valor);
 
@@ -136,8 +137,30 @@ function eventos() {
     $('#ir').unbind('click');
     $('#ir').on('click', function () {
         pagina = $('#pagina').val();
-        $('#page_num').text(pagina);
-        crearFrame();
+        if (pagina <= totalpaginas && pagina > 0) {
+            $('#page_num').text(pagina);
+            crearFrame();
+
+        }
+    });
+
+}
+
+function evitarLetras() {
+
+    $('#pagina').keypress(function (b)
+    {
+        var key = b.which || b.keyCode;
+
+        if (!(key >= 48 && key <= 57) && // Interval of values (0-9)
+                (key !== 8) && // Backspace
+                (key !== 9)   // Percentage
+                // coma
+                )               // guion
+        {
+            b.preventDefault();
+            return false;
+        }
     });
 
 }
