@@ -29,6 +29,12 @@
                         <div class="active section">Actualizar Permisos</div>
                     </div>
 
+                    <?php if (!empty($message)) { ?>
+
+                        <?php echo $message; ?>
+
+                    <?php } ?>
+
                     <h3 class="ui header">
                         <i class="users icon"></i>
                         <div class="content">
@@ -36,11 +42,7 @@
                         </div>
                     </h3>
 
-                    <?php if (!empty($message)) { ?>
-                        <div id="message">
-                            <?php echo $message; ?>
-                        </div>
-                    <?php } ?>
+
 
                     <?php echo form_open(current_url()); ?>  	
                     <table class="ui red celled table table-hover">
@@ -61,25 +63,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($privileges as $privilege) { ?>
-                                <tr>
-                                    <td>
-                                        <input type="hidden" name="update[<?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'id')]; ?>][id]" value="<?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'id')]; ?>"/>
-                                        <?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'name')]; ?>
-                                    </td>
-                                    <td><?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'description')]; ?></td>
-                                    <td class="align_ctr">
-                                        <?php
-                                        // Define form input values.
-                                        $current_status = (in_array($privilege[$this->flexi_auth->db_column('user_privileges', 'id')], $group_privileges)) ? 1 : 0;
-                                        $new_status = (in_array($privilege[$this->flexi_auth->db_column('user_privileges', 'id')], $group_privileges)) ? 'checked="checked"' : NULL;
-                                        ?>
-                                        <input type="hidden" name="update[<?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'id')]; ?>][current_status]" value="<?php echo $current_status ?>"/>
-                                        <input type="hidden" name="update[<?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'id')]; ?>][new_status]" value="0"/>
-                                        <input type="checkbox" name="update[<?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'id')]; ?>][new_status]" value="1" <?php echo $new_status ?>/>
-                                    </td>
-                                </tr>
-                            <?php } ?>
+                            <?php
+                            foreach ($privileges as $privilege) {
+                                if ($group['ugrp_admin'] == $privilege['Tipo']) {
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" name="update[<?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'id')]; ?>][id]" value="<?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'id')]; ?>"/>
+        <?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'name')]; ?>
+                                        </td>
+                                        <td><?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'description')]; ?></td>
+                                        <td class="align_ctr">
+                                            <?php
+                                            // Define form input values.
+                                            $current_status = (in_array($privilege[$this->flexi_auth->db_column('user_privileges', 'id')], $group_privileges)) ? 1 : 0;
+                                            $new_status = (in_array($privilege[$this->flexi_auth->db_column('user_privileges', 'id')], $group_privileges)) ? 'checked="checked"' : NULL;
+                                            ?>
+                                            <input type="hidden" name="update[<?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'id')]; ?>][current_status]" value="<?php echo $current_status ?>"/>
+                                            <input type="hidden" name="update[<?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'id')]; ?>][new_status]" value="0"/>
+                                            <input type="checkbox" name="update[<?php echo $privilege[$this->flexi_auth->db_column('user_privileges', 'id')]; ?>][new_status]" value="1" <?php echo $new_status ?>/>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                            }
+                            ?>
                         </tbody>
                         <tfoot>
                             <tr>
@@ -89,18 +97,18 @@
                             </tr>
                         </tfoot>
                     </table>					
-                    <?php echo form_close(); ?>
+<?php echo form_close(); ?>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Footer -->  
-    <?php $this->load->view('plantillas/footer'); ?> 
+<?php $this->load->view('plantillas/footer'); ?> 
 
 
     <!-- Scripts -->  
-    <?php $this->load->view('plantillas/scripts'); ?> 
+<?php $this->load->view('plantillas/scripts'); ?> 
 
 </body>
 </html>

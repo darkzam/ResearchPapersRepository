@@ -87,7 +87,7 @@ class Usuario_admin extends CI_Controller {
 
     function request_background() {
         if (!$this->flexi_auth->is_privileged('Administrar Solicitudes')) {
-            $this->session->set_flashdata('message', '<p class="error_msg">No tienes los permisos suficientes para esta accion.</p>');
+            $this->session->set_flashdata('message', '<div class="ui error message">No tienes los permisos suficientes para esta accion.</div>');
             redirect('usuario_admin');
         }
         $this->load->view('usuarios/admin/background', $this->data);
@@ -101,6 +101,8 @@ class Usuario_admin extends CI_Controller {
         $usuario = $this->flexi_auth->get_user_by_id($this->data['solicitud']['Id_user']);
         $this->data['user'] = $usuario->row_array();
         $this->data['tesis'] = $this->usuario_model->show_ficha_by_id($this->data['solicitud']['Id_ficha']);
+
+        $this->data['programas'] = $this->usuario_model->get_programas();
         $this->load->view('usuarios/admin/analizar_solicitud', $this->data);
     }
 
@@ -133,8 +135,8 @@ class Usuario_admin extends CI_Controller {
     }
 
     function gestionar_tesis() {
-        if (!$this->flexi_auth->is_privileged('Gestionar Tesis')) {
-            $this->session->set_flashdata('message', '<p class="error_msg">No tienes los permisos suficientes para esta accion.</p>');
+        if (!$this->flexi_auth->is_privileged('Añadir Tesis')) {
+            $this->session->set_flashdata('message', '<div class="ui error message">No tienes los permisos suficientes para esta accion.</div>');
             redirect('usuario_admin');
         }
         $this->data['msg'] = '';
@@ -175,7 +177,7 @@ class Usuario_admin extends CI_Controller {
             //load the upload library
 
             if (!empty($_FILES['userfile']['name'])) {
-             //   $this->session->set_flashdata("success", "Por aca paso");
+                //   $this->session->set_flashdata("success", "Por aca paso");
 
 
                 $idprograma = $this->input->post('programa');
@@ -237,7 +239,7 @@ class Usuario_admin extends CI_Controller {
 
         // Check user has privileges to view user accounts, else display a message to notify the user they do not have valid privileges.
         if (!$this->flexi_auth->is_privileged('Administrar Usuarios')) {
-            $this->session->set_flashdata('message', '<p class="error_msg">No tienes los permisos suficientes para esta accion.</p>');
+            $this->session->set_flashdata('message', '<div class="ui error message">No tienes los permisos suficientes para esta accion.</div>');
             redirect('usuario_admin');
         }
 
@@ -317,7 +319,7 @@ class Usuario_admin extends CI_Controller {
     function administrar_grupos() {
         // Check user has privileges to view user groups, else display a message to notify the user they do not have valid privileges.
         if (!$this->flexi_auth->is_privileged('Administrar Grupos de Usuarios')) {
-            $this->session->set_flashdata('message', '<p class="error_msg">No tienes los permisos suficientes para esta accion.</p>');
+            $this->session->set_flashdata('message', '<div class="ui error message">No tienes los permisos suficientes para esta accion.</div>');
             redirect('usuario_admin');
         }
 
@@ -341,6 +343,7 @@ class Usuario_admin extends CI_Controller {
 
     function actualizar_permisos_grupos($group_id) {
         // Check user has privileges to update group privileges, else display a message to notify the user they do not have valid privileges.
+
         if (!$this->flexi_auth->is_privileged('Administrar Grupos de Usuarios')) {
             $this->session->set_flashdata('message', '<p class="error_msg">No tienes los permisos suficientes para esta accion.</p>');
             redirect('usuario_admin/administrar_grupos');
@@ -355,12 +358,17 @@ class Usuario_admin extends CI_Controller {
         // Get data for the current user group.
         $sql_where = array($this->flexi_auth->db_column('user_group', 'id') => $group_id);
         $this->data['group'] = $this->flexi_auth->get_groups_row_array(FALSE, $sql_where);
-
+        
+         if (empty($this->data['group'])) {
+            redirect('usuario_admin/administrar_grupos');
+        }
+        
         // Get all privilege data. 
         $sql_select = array(
             $this->flexi_auth->db_column('user_privileges', 'id'),
             $this->flexi_auth->db_column('user_privileges', 'name'),
-            $this->flexi_auth->db_column('user_privileges', 'description')
+            $this->flexi_auth->db_column('user_privileges', 'description'),
+            $this->flexi_auth->db_column('user_privileges', 'tipo')
         );
         $this->data['privileges'] = $this->flexi_auth->get_privileges_array($sql_select);
 
@@ -382,11 +390,15 @@ class Usuario_admin extends CI_Controller {
         // For demo purposes of demonstrate whether the current defined user privilege source is getting privilege data from either individual user 
         // privileges or user group privileges, load the settings array containing the current privilege sources. 
         $this->data['privilege_sources'] = $this->auth->auth_settings['privilege_sources'];
-
         $this->load->view('usuarios/admin/actualizar_permisos_grupos_view', $this->data);
     }
 
     function estadisticas() {
+         if (!$this->flexi_auth->is_privileged('Estadisticas')) {
+            $this->session->set_flashdata('message', '<div class="ui error message">No tienes los permisos suficientes para esta accion.</div>');
+            redirect('usuario_admin');
+        }
+
         $this->load->view('usuarios/admin/estadisticas_view');
     }
 
@@ -419,8 +431,8 @@ class Usuario_admin extends CI_Controller {
     }
 
     function modificar_tesis() {
-        if (!$this->flexi_auth->is_privileged('Gestionar Tesis')) {
-            $this->session->set_flashdata('message', '<p class="error_msg">No tienes los permisos suficientes para esta accion.</p>');
+        if (!$this->flexi_auth->is_privileged('Modificar Tesis')) {
+            $this->session->set_flashdata('message', '<div class="ui error message">No tienes los permisos suficientes para esta accion.</div>');
             redirect('usuario_admin');
         }
         $this->data['msg'] = '';

@@ -113,7 +113,7 @@
 	$config['database']['user_privileges']['columns']['id'] = 'upriv_id';
 	$config['database']['user_privileges']['columns']['name'] = 'upriv_name';
 	$config['database']['user_privileges']['columns']['description'] = 'upriv_desc';
-	
+	$config['database']['user_privileges']['columns']['tipo'] = 'Tipo';
 	/**
 	 * User Privilege Users Table
 	 * The user privilege user table is used to assign privileges to users. Multiple privileges can be assigned to a user.

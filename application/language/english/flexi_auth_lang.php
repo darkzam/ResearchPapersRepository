@@ -57,11 +57,11 @@ $lang['account_suspended'] 							= 'Tu cuenta ha sido suspendida.';
 // Account Changes
 $lang['update_successful']							= 'La informacion de la cuenta ha sido actualizada.';
 $lang['update_unsuccessful']						= 'Incapaz de actualizar la informacion de la cuenta.';
-$lang['delete_successful']							= 'Account information has been successfully deleted.';
+$lang['delete_successful']							= 'La informacion de la cuenta ha sido actualizada.';
 $lang['delete_unsuccessful']						= 'Unable to delete account information.';
 
 // Form Validation
-$lang['form_validation_duplicate_identity'] 		= "Ya existe una cuenta con este email  o nombre de usuario.";
+$lang['form_validation_duplicate_identity'] 		= "Ya existe una cuenta con este <b>Email</b>  o <b>Codigo/Cedula</b>.";
 $lang['form_validation_duplicate_email'] 			= "The Email of %s field is not available.";
 $lang['form_validation_duplicate_username'] 		= "The Username of %s field is not available.";
 $lang['form_validation_current_password'] 			= "The %s field is invalid.";

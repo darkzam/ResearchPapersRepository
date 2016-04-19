@@ -76,7 +76,7 @@
 
                                     <th class="spacer_100 align_ctr tooltip_trigger"
                                         title="Indicates the user group the user belongs to.">
-                                        User Group
+                                        Grupo de Usuario
                                     </th>
 
                                     <th class="spacer_100 align_ctr tooltip_trigger"

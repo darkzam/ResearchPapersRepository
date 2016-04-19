@@ -11,10 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/var/www/SistemaConsultas/includes/css/verpdf.css</file>
-            <file>file:/var/www/SistemaConsultas/application/views/usuarios/public/verpdf.php</file>
-            <file>file:/var/www/SistemaConsultas/includes/js/visualizar2.js</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

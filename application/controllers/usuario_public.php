@@ -104,7 +104,7 @@ class usuario_public extends CI_Controller {
      */
     function update_account() {
         if (!$this->flexi_auth->is_privileged('Actualizar Perfil')) {
-            $this->session->set_flashdata('message', '<p class="error_msg">No tienes los permisos suficientes para esta accion.</p>');
+            $this->session->set_flashdata('message', '<div class="ui error message">No tienes los permisos suficientes para esta accion.</div>');
             redirect('usuario_public');
         }
         $this->load->model('usuario_model');
@@ -151,7 +151,7 @@ class usuario_public extends CI_Controller {
 
     function search_by() {
         if (!$this->flexi_auth->is_privileged('Buscar Tesis')) {
-            $this->session->set_flashdata('message', '<p class="error_msg">No tienes los permisos suficientes para esta accion.</p>');
+            $this->session->set_flashdata('message', '<div class="ui error message">No tienes los permisos suficientes para esta accion.</div>');
             redirect('usuario_public');
         }
         //si el boton submit buscar ha sido presionado, 
@@ -238,7 +238,7 @@ class usuario_public extends CI_Controller {
 
     function check_request_status() {
         if (!$this->flexi_auth->is_privileged('Consultar Estado de Solicitudes')) {
-            $this->session->set_flashdata('message', '<p class="error_msg">No tienes los permisos suficientes para esta accion.</p>');
+            $this->session->set_flashdata('message', '<div class="ui error message">No tienes los permisos suficientes para esta accion.</div>');
             redirect('usuario_public');
         }
         $this->load->view('usuarios/public/solicitudes');

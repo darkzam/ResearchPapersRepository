@@ -38,9 +38,9 @@
                             <div class="active section">Administrar Grupos de Usuarios</div>
                         </div>
                         <?php if (!empty($message)) { ?>
-                            <div id="message">
+                          
                                 <?php echo $message; ?>
-                            </div>
+                           
                         <?php } ?>
 
 
@@ -83,7 +83,7 @@
                                         <td><?php echo $group[$this->flexi_auth->db_column('user_group', 'description')]; ?></td>
                                         <td class="align_ctr"><?php echo ($group[$this->flexi_auth->db_column('user_group', 'admin')] == 1) ? "Si" : "No"; ?></td>
                                         <td class="align_ctr">
-                                            <a href="<?php echo $base_url . 'usuario_admin/actualizar_permisos_grupos/' . $group[$this->flexi_auth->db_column('user_group', 'id')]; ?>">Modificar</a>
+                                            <a class="ui button" href="<?php echo $base_url . 'usuario_admin/actualizar_permisos_grupos/' . $group[$this->flexi_auth->db_column('user_group', 'id')]; ?>">Modificar</a>
                                         </td>	
                                     </tr>
                                 <?php } ?>
