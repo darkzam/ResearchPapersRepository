@@ -49,6 +49,7 @@ class Usuario_admin extends CI_Controller {
 
         // Define a global variable to store data that is then used by the end view page.
         $this->data = null;
+        $this->pathTesis = "/homes/temporal";
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
     }
 
@@ -185,14 +186,14 @@ class Usuario_admin extends CI_Controller {
 
 //                $nombres = ['ADMINISTRACION DE EMPRESAS', 'CONTADURIA PUBLICA', 'EDU FISICA', 'INGENIERIA  INDUSTRIAL', 'PSICOLOGIA'];
                 //verificar que exista el directorio
-                if (!is_dir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'))) {
+                if (!is_dir($this->pathTesis."/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'))) {
 
                     $oldmask = umask(0);
-                    mkdir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'), 0777, TRUE);
+                    mkdir($this->pathTesis."/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'), 0777, TRUE);
                     umask($oldmask);
                 }
                 $config['remove_spaces'] = false;
-                $config['upload_path'] = "/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano');
+                $config['upload_path'] = $this->pathTesis."/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano');
                 $config['allowed_types'] = 'pdf';
                 $this->load->library('upload');
                 $this->upload->initialize($config);
@@ -475,7 +476,7 @@ class Usuario_admin extends CI_Controller {
     function push_file($name, $año, $codigo) {
         // make sure it's a file before doing anything!
         //$nombrearchivo = utf8_decode($name);
-        $directoriobase = "/home/zamir/Documents/tesiscompletas/" . $codigo . "/" . $año . "/";
+        $directoriobase = $this->pathTesis."/tesiscompletas/" . $codigo . "/" . $año . "/";
         $path = $directoriobase . urldecode($name);
 
         if (is_file($path)) {
@@ -547,15 +548,15 @@ class Usuario_admin extends CI_Controller {
                 //imod
                 //nuevo programa
 
-                $directoriobase = "/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano');
+                $directoriobase = $this->pathTesis."/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano');
                 $config['allowed_types'] = 'pdf';
                 $config['upload_path'] = $directoriobase;
                 $config['remove_spaces'] = false;
                 //entonces detectar si la nueva carpeta de programa existe, sino crearla para subir el archivo independientemente del archivo anterior
-                if (!is_dir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'))) {
+                if (!is_dir($this->pathTesis."/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'))) {
 
                     $oldmask = umask(0);
-                    mkdir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'), 0777, TRUE);
+                    mkdir($this->pathTesis."/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'), 0777, TRUE);
                     umask($oldmask);
                 }
 
@@ -589,14 +590,14 @@ class Usuario_admin extends CI_Controller {
 
                     //entonces detectar si el viejo archivo existe si existe borrarlo
                     //borrar el archivo completo anterior, manteniendo el folder
-                    if (is_file("/home/zamir/Documents/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path'])) {
+                    if (is_file($this->pathTesis."/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path'])) {
 
-                        unlink("/home/zamir/Documents/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path']);
+                        unlink($this->pathTesis."/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path']);
                     }
                     //borrar la antigua carpeta de id de las hojas para la visualizacion
-                    if (is_dir("/home/zamir/Documents/tesishojas/" . $id)) {
+                    if (is_dir($this->pathTesis."/tesishojas/" . $id)) {
                         //si existe borre el tesishojas/id/ y su contenido
-                        $files = glob("/home/zamir/Documents/tesishojas/" . $id . "/*"); // get all file names
+                        $files = glob($this->pathTesis."/tesishojas/" . $id . "/*"); // get all file names
                         foreach ($files as $file) { // iterate files
                             if (is_file($file)) {
                                 unlink($file); // delete file
@@ -615,10 +616,10 @@ class Usuario_admin extends CI_Controller {
             } else {
                 //se actualizan datos pero sin subir nuevo archivo
                 //se verifica que exista el dir, sino existe se crea con permisos 0777
-                if (!is_dir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'))) {
+                if (!is_dir($this->pathTesis."/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'))) {
 
                     $oldmask = umask(0);
-                    mkdir("/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'), 0777, TRUE);
+                    mkdir($this->pathTesis."/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano'), 0777, TRUE);
                     umask($oldmask);
                 }
                 //sacar el codigo del programa y año y archivo viejo
@@ -626,9 +627,9 @@ class Usuario_admin extends CI_Controller {
                 $programaviejo = $this->usuario_model->get_programas($ficha['Programa']);
                 //entonces detectar si el viejo archivo existe si existe borrarlo
                 //si el archivo anterior existe, moverlo al nuevo directorio, luego eliminar el archivo anterior
-                if (is_file("/home/zamir/Documents/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path'])) {
+                if (is_file($this->pathTesis."/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path'])) {
 
-                    rename("/home/zamir/Documents/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path'], "/home/zamir/Documents/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano') . "/" . $ficha['Path']);
+                    rename($this->pathTesis."/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path'], $this->pathTesis."/tesiscompletas/" . $programa['codigo'] . "/" . $this->input->post('ano') . "/" . $ficha['Path']);
                     //   unlink("/home/zamir/Documents/tesiscompletas/" . $programaviejo['codigo'] . "/" . $ficha['Año'] . "/" . $ficha['Path']);
                 }
 
@@ -679,13 +680,13 @@ class Usuario_admin extends CI_Controller {
         //aumentamos el tiempo de ejecucioin del script por si demora mucho -1 es sin limite
         ini_set('MAX_EXECUTION_TIME', -1);
         //ver si existe la carpeta Id en tesishojas Sino esta creela con los permisos 777
-        if (!is_dir("/home/zamir/Documents/tesishojas/" . $id)) {
+        if (!is_dir($this->pathTesis."/tesishojas/" . $id)) {
             $oldmask = umask(0);
-            mkdir("/home/zamir/Documents/tesishojas/" . $id, 0777, TRUE);
+            mkdir($this->pathTesis."/tesishojas/" . $id, 0777, TRUE);
             umask($oldmask);
         }
 
-        exec('gs -sDEVICE=pdfwrite -dSAFER -o "/home/zamir/Documents/tesishojas/' . $id . '/hoja-%d.pdf" "' . $path . '"');
+        exec('gs -sDEVICE=pdfwrite -dSAFER -o "'.$this->pathTesis.'/tesishojas/' . $id . '/hoja-%d.pdf" "' . $path . '"');
     }
 
     function logout() {
