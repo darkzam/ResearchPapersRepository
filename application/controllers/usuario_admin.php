@@ -9,7 +9,7 @@ class Usuario_admin extends CI_Controller {
         parent::__construct();
 
         // To load the CI benchmark and memory usage profiler - set 1==1.
-        if (1 == 2) {
+       /* if (1 == 2) {
             $sections = array(
                 'benchmarks' => TRUE, 'memory_usage' => TRUE,
                 'config' => FALSE, 'controller_info' => FALSE, 'get' => FALSE, 'post' => FALSE, 'queries' => FALSE,
@@ -17,7 +17,7 @@ class Usuario_admin extends CI_Controller {
             );
             $this->output->set_profiler_sections($sections);
             $this->output->enable_profiler(TRUE);
-        }
+        }*/
 
         // Load required CI libraries and helpers.
         $this->load->database();
