@@ -1,5 +1,5 @@
 
-<form class="ui form">
+<form class="ui form" novalidate>
 
     <h4>Datos Personales</h4>
     <input id="puserid" value="<?php echo $user['uacc_id']; ?>" hidden disabled>
@@ -64,19 +64,19 @@
         <div class="inline required field">
             <label>Paginas a Solicitar </label>
 
-            <input placeholder="Ejemplo: 12,24,1-4,1-5" type="text" id="paginas" required>
-
+            <input class="inputpopup" type="text" id="paginas" required>
+                <div class="ui popup">
+                    <div class="header">Ingrese Paginas</div>
+                    <div class="content">Individual: 12,24,35 <br/> Rango: 1-10,20-30,50-80 <br/> Combinado: 10,20,30-40,60-80 </div>
+                </div>
             <button type="button" id="añadir" class="ui small button">Añadir</button>
-
         </div>
-
-
     </div>
     <div id="etiquetas"></div>
 
 </form>
 
-
+<script type="text/javascript"> $('.inputpopup').popup({ inline: true}); </script> 
 
 
 

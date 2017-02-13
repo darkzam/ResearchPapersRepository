@@ -9,6 +9,7 @@ $(document).on('ready', function() {
     $('.ui.accordion')
             .accordion()
             ;
+    //$('.inputpopup').popup({on:'focus'}); 
     //  $('form').addClass('ui form');
 
 });

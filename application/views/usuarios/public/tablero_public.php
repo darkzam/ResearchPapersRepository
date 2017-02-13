@@ -46,10 +46,17 @@
                             </div>
                         </h2>
                         <div class="ui divider"></div>
+                         <div class="ui ordered list">
+                                <a href="#div_1" class="item">Buscar y Solicitar Trabajo de Grado</a>
+                                <a href="#div_2" class="item">Consultar las Solicitudes Realizadas</a>
+                                <a href="#div_3" class="item">Actualizar Datos</a>
+                            </div>
                         <div class="ui text container">
+
+
                             <div class="ui one column grid">
                                 <div class="ui column">
-                                    <div class="ui centered header">Guia de Usuario</div>
+                                    <div id="div_1" class="ui centered header">Guia de Usuario</div>
                                     <p>A continuacion se explica la funcionalidad y uso de cada modulo.</p>
                                     <h3>1.Buscar y Solicitar Trabajo de Grado</h3>
                                     <p>Si desea buscar y solicitar trabajos de grado, puede hacerlo entrando en <b>Busqueda de Tesis</b> : </p>
@@ -102,7 +109,7 @@
                                 <div class="ui column">
                                     <p> Estos rangos y paginas los adicionamos a nuestra solicitud dando click en <b>Añadir</b>, con esto podremos ver el contenido a solicitar hasta el momento; se puede borrar cada etiqueta dando click en <b>X</b> como tambien podemos ingresar nuevo contenido a solicitar.</p><p> Por ultimo si hemos confirmado nuestros datos y las paginas a solicitar crearemos la solicitud dando click en <b>Solicitar Tesis</b>. Si deseamos actualizar nuestra informacion de usuario daremos click en <b>Modificar Datos</b>.</p>
 
-                                    <h3>2.Consultar las Solicitudes Realizadas</h3>
+                                    <h3 id="div_2">2.Consultar las Solicitudes Realizadas</h3>
                                     <p>Para revisar el estado de sus solicitudes entre a la opcion <b>Mis Solicitudes</b> </p>
                                 </div>  
                                 <div class="ui column">
@@ -117,7 +124,7 @@
                                     </p>
                                 </div>
 
-                                <div class="ui column">
+                                <div id="div_3" class="ui column">
                                     <h3>3.Actualizar Datos</h3>
                                     <p>Si necesita modificar los Datos de su Cuenta, Informacion Personal y  de Contacto, puede hacerlo entrando a la opcion <b>Actualizar Datos</b> :</p>
                                 </div> 
