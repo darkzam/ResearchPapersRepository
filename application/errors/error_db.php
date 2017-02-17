@@ -52,6 +52,7 @@ p {
 	margin: 12px 15px 12px 15px;
 }
 </style>
+     <?php $this->load->view('plantillas/head'); ?> 
 </head>
 <body>
 	<div id="container">
@@ -59,4 +60,5 @@ p {
 		<?php echo $message; ?>
 	</div>
 </body>
+     <?php $this->load->view('plantillas/footer'); ?> 
 </html>
