@@ -202,7 +202,7 @@ $(document).on('ready', function() {
          $('#show').modal('show');*/
 
         /*  $('#pestaña2').addClass('active');
-         $('#pc2').addClass('active');
+         $('#pc2').adserdClass('active');
          $('#pestaña1').removeClass('active');
          $('#pc1').removeClass('active');
          */
@@ -210,6 +210,7 @@ $(document).on('ready', function() {
         aprobar(id);
         denegar(id);
         eventoBotonesSgteAtras(id);
+        exportar(id);
         // mostrarBotones();
         $('#principal').tab('change tab', 'p2');
         $('#pestaña1').tab('change tab', 'p2');
@@ -444,6 +445,17 @@ $(document).on('ready', function() {
 
         $('.ui.accordion').accordion();
      
+    }
+
+    function exportar(id){
+
+        $("#exportar").unbind('click');
+        $("#exportar").on('click', function() {
+
+                 window.open('reporteSolicitud/' + id , '_blank');
+
+
+        });
     }
 
 

@@ -731,4 +731,93 @@ class Usuario_admin extends CI_Controller {
       }
       }
       } */
+
+      function reporteSolicitud($id){
+        //tiene que recibir el id de la solicitud actual
+        //exporta el pdf reporte de solicitud con el estado ACTUAL de la solicitud y la fecha ACTUAL
+        $this->load->model('usuario_model');
+
+        $this->data['solicitud'] = $this->usuario_model->get_solicitud_by_id($id);
+        $this->data['usuario'] = $this->flexi_auth->get_user_by_id($this->data['solicitud']['Id_user'])->row_array();
+        /*este seria el id de la solicitud que entra como parametro*/
+        $date = date('Y/m/d', time());
+
+        $path = "./includes/reportes/" . $id . ".pdf";
+
+     //   if (!is_file($tempPath)) {
+
+            $this->load->library('fpdf/Pdf');
+            $this->pdf->SetMargins(3.0, 5.0, 3.0);
+            //$this->pdf->SetAutoPageBreak(true, 0.0);
+            $this->pdf->AddPage('P', array(76, 60));
+         // $this->pdf->AddPage();
+
+            $this->pdf->SetFont('Arial', '', 7);
+            $this->pdf->SetTextColor(0, 0, 0);
+
+          //$texto = $date."\nEstado:\n" . $this->data['solicitud']['Estado']. "\nPaginas:\n" . $this->data['solicitud']['Paginas'] . "\nNombre:\n" . $this->data['usuario']['upro_first_name'] . "\nCodigo:\n" . $this->data['usuario']['Codigo'];
+
+          //  $texto = $this->data['usuario']['uacc_email'] ;
+
+           // $this->pdf->MultiCell(0, 6.0, $texto, 1, 'C', false);
+
+            $this->pdf->Cell(10, 5, "", 0, 0 );
+            $this->pdf->Cell(30, 5, "SOLICITUD DE TESIS", 0, 1);
+
+            $this->pdf->Cell(70, 3, "", 0, 1 );
+
+            $this->pdf->Cell(5, 5, "ID:", 0, 0 );
+            $this->pdf->Cell(10, 5, $id, 0, 1 );
+
+            $this->pdf->Cell(70, 3, "", 0, 1 ); //dummy line to add a veritcal space
+
+            $this->pdf->Cell(15, 5, "ESTADO:", 0, 0 );
+            $this->pdf->Cell(35, 5, $this->data['solicitud']['Estado'] , 0, 1 );
+
+            $this->pdf->Cell(70, 3, "", 0, 1 );
+
+            $this->pdf->Cell(15, 5, "PAGINAS:", 0, 0 );
+            $this->pdf->Cell(35, 5, $this->data['solicitud']['Paginas'], 0, 1 );
+
+          $this->pdf->Cell(70, 3, "", 0, 1 );
+
+            $this->pdf->Cell(15, 5, "NOMBRE:", 0, 0 );
+            $this->pdf->Cell(35, 5,  $this->data['usuario']['upro_first_name'] ." ". $this->data['usuario']['upro_last_name'] , 0, 1 );
+
+          $this->pdf->Cell(70, 3, "", 0, 1 );
+
+           $this->pdf->Cell(15, 5, "CODIGO:", 0, 0 );
+           $this->pdf->Cell(35, 5, $this->data['usuario']['uacc_username'], 0, 1 );
+
+            $this->pdf->Output($path, 'F');
+        
+        if (is_file($path)) {
+            // required for IE
+            if (ini_get('zlib.output_compression')) {
+                ini_set('zlib.output_compression', 'Off');
+            }
+
+            // get the file mime type using the file extension
+            $this->load->helper('file');
+
+            $mime = get_mime_by_extension($path);
+
+            // Build the headers to push out the file properly.
+            header('Pragma: public');     // required
+            header('Expires: 0');         // no cache
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($path)) . ' GMT');
+            header('Cache-Control: private', false);
+            header('Content-Type: ' . $mime);  // Add the mime type from Code igniter.
+            //header('Content-Type: application/pdf'); 
+            header('Content-Disposition: inline; filename="' . basename($name) . '"');  // Add the file name
+            header('Content-Transfer-Encoding: binary');
+            header('Content-Length: ' . filesize($path)); // provide file size
+            header('Connection: close');
+            readfile($path); // push it out
+            exit();
+        }
+
+
+      }
 }
