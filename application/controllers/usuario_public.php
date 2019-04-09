@@ -52,7 +52,7 @@ class usuario_public extends CI_Controller {
         $this->load->vars('current_url', $this->uri->uri_to_assoc(1));
         // Define a global variable to store data that is then used by the end view page.
         $this->data = null;
-        $this->pathTesis = "/homes/temporal";
+        $this->pathTesis = "/home";
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
         // $this->data['busqueda']= null;
     }

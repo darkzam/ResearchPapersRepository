@@ -49,7 +49,7 @@ class Usuario_admin extends CI_Controller {
 
         // Define a global variable to store data that is then used by the end view page.
         $this->data = null;
-        $this->pathTesis = "/homes/temporal";
+        $this->pathTesis = "/home";
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
     }
 
