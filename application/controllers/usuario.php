@@ -43,7 +43,7 @@ class Usuario extends CI_Controller {
             if ($this->flexi_auth->is_admin()) {
                 redirect('usuario_admin/dashboard');
             } else {
-                echo "<script>alert('te has logueado user normal');</script>";
+              //  echo "<script>alert('te has logueado user normal');</script>";
                 redirect('usuario_public/dashboard');
             }
         }
