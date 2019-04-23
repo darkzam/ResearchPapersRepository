@@ -527,7 +527,7 @@ class Usuario_admin extends CI_Controller {
         $this->form_validation->set_rules('ano', 'Año', 'required|numeric|exact_length[4]');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
         $this->form_validation->set_rules('keywords', 'Palabras Claves', 'required');
-        $this->form_validation->set_rules('programa', 'Programa', 'required|integer|greater_than[-1]|less_than[6]');
+       // $this->form_validation->set_rules('programa', 'Programa', 'required|integer|greater_than[-1]|less_than[6]');
 
         $this->load->model('usuario_model');
 
